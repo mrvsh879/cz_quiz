@@ -146,6 +146,9 @@
   <script>
   // ================= QUIZ LOGIC (IIFE + explicit window exports) =================
   (function(){
+    // ======= CONFIG: вставь сюда свой Formspree endpoint вида https://formspree.io/f/abcd1234 =======
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xldpbqkv';
+
     const steps = [
       { q: '1) Скільки вам років?', name:'age', type:'radio', options:['від 20 до 40','від 40 до 75','75+'] },
       { q: '2) Чи можливо заробити на відпустку через інвестиції?', name:'vac', type:'radio', options:['можливо','не віриться','вже заробив, хочу ще'] },
@@ -283,8 +286,11 @@
         <div class="badge">Результат: ${prof.title}</div>
         <p class="muted" style="margin:10px 0 14px">${prof.rec}</p>
 
-        <form id="leadForm" action="https://formspree.io/f/XXXXXXXX" method="POST">
+        <form id="leadForm" action="#" method="POST">
           ${hiddenPayload}
+          <input type="hidden" name="_subject" value="Результат квізу — ${prof.title}">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="fld"><label>Ім'я та прізвище</label><input required name="full_name" placeholder="Ваше ім'я"/></div>
           <div class="fld"><label>E‑mail</label><input required type="email" name="email" placeholder="name@example.com"/></div>
           <div class="fld"><label>Телефон</label><input name="phone" placeholder="+420..."/></div>
@@ -299,6 +305,7 @@
           <button class="submit" type="submit">Отримати рекомендацію</button>
           <div class="note">Натискаючи кнопку, ви надсилаєте відповіді та контакти нашому аналітику.</div>
           <div id="ok" class="success">Дякуємо! Ми отримали ваші дані. Перевірте пошту — надішлемо рекомендацію.</div>
+          <div id="err" class="success" style="display:none;background:#fff1f2;border-color:#fecdd3;color:#9f1239">Сталася помилка при відправці. Спробуйте ще раз або напишіть нам листа.</div>
         </form>
       `;
 
@@ -306,17 +313,26 @@
 
       // Formspree без перезавантаження (опційно)
       const form = document.getElementById('leadForm');
+      // подставляем endpoint централизованно
+      form.action = FORMSPREE_ENDPOINT;
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
+        const btn = form.querySelector('.submit');
+        const ok  = document.getElementById('ok');
+        const er  = document.getElementById('err');
+        ok.style.display='none'; er.style.display='none';
+        btn.disabled = true; btn.textContent = 'Відправляємо…';
         const fd = new FormData(form);
         try{
           const r = await fetch(form.action, {method:'POST', body:fd, headers:{'Accept':'application/json'}});
-          if(r.ok){ form.reset(); document.getElementById('ok').style.display='block'; }
-        }catch(err){ console.error(err); }
+          if(r.ok){ form.reset(); ok.style.display='block'; }
+          else { er.style.display='block'; }
+        }catch(err){ console.error(err); er.style.display='block'; }
+        finally{ btn.disabled=false; btn.textContent='Отримати рекомендацію'; }
       });
     }
 
-    // Експортуємо у глобальний скоуп для inline onclick
+    // ===== Expose to global for inline handlers =====
     window.openQuiz  = openQuiz;
     window.closeQuiz = closeQuiz;
     window.nextStep  = nextStep;
@@ -328,21 +344,29 @@
       const tests = [];
       const assert = (name, cond)=>{ tests.push({name, pass:!!cond}); if(!cond){ console.error('[TEST FAIL]', name); } };
 
+      // базові перевірки експорту
       assert('openQuiz exists', typeof window.openQuiz === 'function');
+      assert('closeQuiz exists', typeof window.closeQuiz === 'function');
       assert('nextStep exists', typeof window.nextStep === 'function');
+      assert('prevStep exists', typeof window.prevStep === 'function');
 
       // Відкриваємо квіз і перевіряємо DOM
       window.openQuiz();
       assert('Quiz is visible', els.quiz.getAttribute('aria-hidden') === 'false');
+      assert('Top Prev disabled on first step', document.getElementById('prevBtnTop').disabled === true);
+      assert('Bottom Prev disabled on first step', document.getElementById('prevBtn').disabled === true);
       assert('Question rendered', !!document.querySelector('.quiz__q'));
 
       // Симуляція кроку
       const firstRadio = document.querySelector('.quiz__answers input[type=radio]');
       if(firstRadio){ firstRadio.click(); window.nextStep(); }
-      assert('Progress updated', parseInt(els.progress.style.width) >= 0);
+      assert('Progress style set', /%$/.test(els.progress.style.width));
+      assert('Top/Bottom next labels match', document.getElementById('nextBtnTop').textContent === document.getElementById('nextBtn').textContent);
 
-      // Прибираємо за собою
+      // Перевіряємо overflow тіла
+      assert('Body overflow hidden on open', getComputedStyle(document.body).overflow === 'hidden');
       window.closeQuiz();
+      assert('Body overflow auto on close', getComputedStyle(document.body).overflow === 'auto');
 
       // Вивід резюме
       const banner = document.createElement('div');
