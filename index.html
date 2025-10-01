@@ -8,13 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#4712a3;            /* фіолетовий фон героя */
+      --bg:#4712a3;            /* фіолетовий фон героя та тесту */
       --accent:#4f46e5;        /* індиго */
       --accent-2:#22c55e;      /* зелений для прогресу */
       --text:#0b1020;          /* основний текст */
       --muted:#6b7280;         /* вторинний текст */
       --card:#ffffff;          /* картки */
-      --cream:#fff7e0;         /* тло тесту */
       --ring:rgba(79,70,229,.2);
       --shadow:0 10px 25px rgba(2,6,23,.18), 0 2px 6px rgba(2,6,23,.12);
       --radius:18px;
@@ -33,7 +32,7 @@
     .lead{font-size:clamp(14px,1.2vw,18px);opacity:.92}
     .lead b{color:#fff}
     .cta-row{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap}
-    .btn{appearance:none;border:0;padding:12px 18px;border-radius:999px;background:#fff;color:#111;font-weight:700;cursor:pointer;box-shadow:var(--shadow);transition:.18s transform,.18s box-shadow}
+    .btn{appearance:none;border:0;padding:16px 22px;border-radius:14px;background:#fff;color:#111;font-weight:800;cursor:pointer;box-shadow:var(--shadow);transition:.18s transform,.18s box-shadow;font-size:18px;min-height:52px;line-height:1.1}
     .btn:hover{transform:translateY(-1px)}
     .btn--ghost{background:transparent;border:1.5px solid rgba(255,255,255,.6);color:#fff}
 
@@ -48,22 +47,25 @@
     .quiz{position:fixed;inset:0;display:none;z-index:70}
     .quiz[aria-hidden="false"]{display:block}
     .quiz__backdrop{position:absolute;inset:0;background:rgba(17,24,39,.56);backdrop-filter:blur(4px)}
-    .quiz__panel{position:absolute;inset:20px;display:grid;grid-template-rows:auto auto 1fr auto;gap:16px;background:var(--cream);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .quiz__top{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#fff8d2;border-bottom:1px dashed rgba(2,6,23,.1)}
-    .quiz__title{font-weight:800;color:#1f2a44}
+    .quiz__panel{position:absolute;inset:20px;display:grid;grid-template-rows:auto auto 1fr auto;gap:16px;background:var(--bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .quiz__top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:transparent;border-bottom:1px dashed rgba(255,255,255,.18)}
+    .quiz__title{font-weight:800;color:#ffffff}
     .quiz__progress-wrap{height:10px;background:#eef2ff;border-radius:999px;overflow:hidden;margin:0 18px}
     .quiz__progress{height:100%;width:0;background:var(--accent-2);transition:width .25s ease}
 
     .quiz__card{margin:12px 14px;background:var(--card);border-radius:16px;box-shadow:var(--shadow)}
     .quiz__q{padding:18px 18px 8px;font-weight:700}
     .quiz__answers{display:grid;gap:8px;padding:0 18px 18px}
-    .opt{display:flex;align-items:flex-start;gap:10px;padding:14px;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s;background:#fff}
+    .opt{display:flex;align-items:flex-start;gap:10px;padding:16px 18px;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s;background:#fff;font-size:16px}
     .opt:hover{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
     .opt input{margin-top:2px}
 
-    .quiz__footer{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;background:#fff;border-top:1px dashed rgba(2,6,23,.08)}
-    .btn-sec{border:1px solid #c7ccff;background:#eef2ff;color:#27309a}
+    .quiz__footer{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;background:#fff;border-top:1px dashed rgba(2,6,23,.08)}
+    .btn-sec{border:1.5px solid #c7ccff;background:#eef2ff;color:#27309a}
     .btn-prim{background:var(--accent);color:#fff}
+    .quiz__nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .quiz__footer .btn{min-width:160px}
+    .quiz__nav .btn{min-width:140px}
 
     /* === RESULT + FORM === */
     .result{margin:12px 14px;background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:16px;display:none}
@@ -88,6 +90,7 @@
       .overlap{display:none}
       .hero__art{max-width:64%}
       .quiz__panel{inset:10px}
+      .quiz__nav .btn, .quiz__footer .btn{flex:1}
     }
   </style>
 </head>
@@ -117,7 +120,11 @@
     <div class="quiz__panel">
       <div class="quiz__top">
         <div class="quiz__title">Швидкий тест: знайдемо для вас безпечний план</div>
-        <button class="btn btn-sec" onclick="closeQuiz()">✕ Закрити</button>
+        <div class="quiz__nav">
+          <button id="prevBtnTop" class="btn btn-sec" onclick="prevStep()" disabled>Назад</button>
+          <button id="nextBtnTop" class="btn btn-prim" onclick="nextStep()">Далі</button>
+          <button class="btn btn-sec" onclick="closeQuiz()">✕</button>
+        </div>
       </div>
       <div class="quiz__progress-wrap" aria-hidden="true"><div id="progress" class="quiz__progress"></div></div>
 
@@ -137,7 +144,8 @@
   </div>
 
   <script>
-    /* ================= QUIZ LOGIC ================= */
+  // ================= QUIZ LOGIC (IIFE + explicit window exports) =================
+  (function(){
     const steps = [
       { q: '1) Скільки вам років?', name:'age', type:'radio', options:['від 20 до 40','від 40 до 75','75+'] },
       { q: '2) Чи можливо заробити на відпустку через інвестиції?', name:'vac', type:'radio', options:['можливо','не віриться','вже заробив, хочу ще'] },
@@ -145,8 +153,8 @@
       { q: '4) Як правильно обрати партнера для інвестицій?', name:'partner', type:'radio', options:['перевірити документи','інвестувати маленьку суму','проконсультуватися з професіоналами','хочу дізнатися'] }
     ];
 
-    let idx = 0; // поточний крок
-    const state = {}; // відповіді користувача
+    let idx = 0;                         // поточний крок
+    const state = {};                    // відповіді користувача
 
     const els = {
       quiz: document.getElementById('quiz'),
@@ -154,14 +162,24 @@
       result: document.getElementById('result'),
       progress: document.getElementById('progress'),
       prevBtn: document.getElementById('prevBtn'),
-      nextBtn: document.getElementById('nextBtn')
+      nextBtn: document.getElementById('nextBtn'),
+      prevBtnTop: document.getElementById('prevBtnTop'),
+      nextBtnTop: document.getElementById('nextBtnTop')
     };
+
+    function resetState(){ for(const k in state) delete state[k]; }
 
     function openQuiz(){
       els.quiz.setAttribute('aria-hidden','false');
       document.body.style.overflow='hidden';
-      idx = 0; renderStep();
+      idx = 0; resetState();
+      // повертаємо видимість нижніх кнопок, якщо ховали на екрані результату
+      els.nextBtn.style.display = '';
+      els.prevBtn.style.display = '';
+      els.progress.style.width = '0%';
+      renderStep();
     }
+
     function closeQuiz(){
       els.quiz.setAttribute('aria-hidden','true');
       document.body.style.overflow='auto';
@@ -176,8 +194,13 @@
       els.progress.style.width = pct + '%';
 
       // кнопки
-      els.prevBtn.disabled = idx === 0;
-      els.nextBtn.textContent = (idx === steps.length - 1) ? 'Показати результат' : 'Далі';
+      const isFirst = idx === 0;
+      const isLast  = idx === steps.length - 1;
+      els.prevBtn.disabled    = isFirst;
+      els.prevBtnTop.disabled = isFirst;
+      const nextText = isLast ? 'Показати результат' : 'Далі';
+      els.nextBtn.textContent    = nextText;
+      els.nextBtnTop.textContent = nextText;
 
       // рендер питання
       const saved = state[step.name] ?? '';
@@ -197,10 +220,9 @@
 
       // слухач вибору
       els.card.querySelectorAll('input[type="radio"]').forEach(inp=>{
-        inp.addEventListener('change', (e)=>{
-          state[step.name] = e.target.value;
-        })
+        inp.addEventListener('change', (e)=>{ state[step.name] = e.target.value; })
       });
+
       // автофокус на перший інпут
       const first = els.card.querySelector('input');
       first && first.focus({preventScroll:true});
@@ -208,24 +230,30 @@
 
     function nextStep(){
       const step = steps[idx];
-      // перевірка вибору
       if(!state[step.name]){ bump(); return; }
       if(idx < steps.length - 1){ idx++; renderStep(); return; }
-      // показуємо результат
       showResult();
     }
+
     function prevStep(){ idx = Math.max(0, idx - 1); renderStep(); }
 
     // Легка анімація "підштовхування" кнопки при відсутності відповіді
     function bump(){
-      els.nextBtn.animate([{transform:'translateY(0)'},{transform:'translateY(-2px)'},{transform:'translateY(0)'}],{duration:240});
+      [els.nextBtn, els.nextBtnTop].forEach(btn=>{
+        if(!btn) return;
+        btn.animate([
+          {transform:'translateY(0)'},
+          {transform:'translateY(-2px)'},
+          {transform:'translateY(0)'}
+        ],{duration:240});
+      });
     }
 
     function profileFrom(state){
       // Дуже проста евристика під ваш MVP
       let score = 0;
       if(state.age === 'від 40 до 75' || state.age === '75+') score += 1;
-      if(state.asset === 'золото') score += 2;               // консервативно
+      if(state.asset === 'золото') score += 2;                 // консервативно
       if(state.asset === 'акції молодої компанії') score -= 1; // агресивно
       if(state.partner === 'перевірити документи') score += 1;
       if(state.partner === 'проконсультуватися з професіоналами') score += 1;
@@ -242,11 +270,14 @@
       els.card.innerHTML = '';
       els.nextBtn.style.display = 'none';
       els.prevBtn.style.display = 'none';
+      if(els.nextBtnTop) els.nextBtnTop.style.display = 'none';
+      if(els.prevBtnTop) els.prevBtnTop.style.display = 'none';
       els.progress.style.width = '100%';
 
       const prof = profileFrom(state);
-      const hiddenPayload = Object.entries(state).map(([k,v])=>`<input type="hidden" name="${k}" value="${v}">`).join('') +
-                             `<input type="hidden" name="profile" value="${prof.title}">`;
+      const hiddenPayload = Object.entries(state)
+        .map(([k,v])=>`<input type="hidden" name="${k}" value="${v}">`).join('') +
+        `<input type="hidden" name="profile" value="${prof.title}">`;
 
       els.result.innerHTML = `
         <div class="badge">Результат: ${prof.title}</div>
@@ -284,6 +315,48 @@
         }catch(err){ console.error(err); }
       });
     }
+
+    // Експортуємо у глобальний скоуп для inline onclick
+    window.openQuiz  = openQuiz;
+    window.closeQuiz = closeQuiz;
+    window.nextStep  = nextStep;
+    window.prevStep  = prevStep;
+
+    // ===================== DEV SELF‑TESTS =====================
+    // Запустити, якщо у URL є ?test=1
+    function runSelfTests(){
+      const tests = [];
+      const assert = (name, cond)=>{ tests.push({name, pass:!!cond}); if(!cond){ console.error('[TEST FAIL]', name); } };
+
+      assert('openQuiz exists', typeof window.openQuiz === 'function');
+      assert('nextStep exists', typeof window.nextStep === 'function');
+
+      // Відкриваємо квіз і перевіряємо DOM
+      window.openQuiz();
+      assert('Quiz is visible', els.quiz.getAttribute('aria-hidden') === 'false');
+      assert('Question rendered', !!document.querySelector('.quiz__q'));
+
+      // Симуляція кроку
+      const firstRadio = document.querySelector('.quiz__answers input[type=radio]');
+      if(firstRadio){ firstRadio.click(); window.nextStep(); }
+      assert('Progress updated', parseInt(els.progress.style.width) >= 0);
+
+      // Прибираємо за собою
+      window.closeQuiz();
+
+      // Вивід резюме
+      const banner = document.createElement('div');
+      banner.id='test-banner';
+      banner.style='position:fixed;right:10px;bottom:10px;background:#111;color:#fff;padding:8px 12px;border-radius:8px;z-index:9999;opacity:.92;font:12px/1.2 Inter,system-ui';
+      const pass = tests.filter(t=>t.pass).length;
+      banner.textContent = `Self‑tests: ${pass}/${tests.length} passed`;
+      document.body.appendChild(banner);
+    }
+
+    if(location.search.includes('test=1')){
+      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', runSelfTests); else runSelfTests();
+    }
+  })();
   </script>
 </body>
 </html>
