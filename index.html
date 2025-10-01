@@ -3,345 +3,287 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Новий стиль в інвестуванні – Безпечний тест + рекомендація</title>
-  <meta name="description" content="Короткий інвестиційний тест для людей 40–70 років. Дізнайтеся, як захистити заощадження від інфляції та отримати стабільний дохід з низьким ризиком. Безкоштовна рекомендація аналітика." />
-  <!-- META keywords (20 ключових фраз) -->
-  <meta name="keywords" content="Безпечні інвестиції,Захист заощаджень від інфляції,Інвестиції для пенсії,Стабільний дохід,Сімейні фінанси,Заощадження та інвестиції,Фінансова впевненість,Забезпечене майбутнє,Довгострокова стабільність,Захист капіталу,Золото та срібло,Консервативна стратегія,Інвестиції в нерухомість,Облігації,Низький ризик,Фінансове планування,Надійний радник,Надійний аналітик,Захист від втрат,Безпечне зростання капіталу,Спадщина та сімейний захист" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>Новий стиль в інвестуванні — MVP</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --blue:#2b6bf3; /* банк-подібний синій */
-      --purple:#6a1fb0; /* фіолетовий hero */
-      --bg:#f5f7fb;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --ok:#10b981;
-      --shadow:0 10px 30px rgba(16,24,40,.08);
+      --bg:#4712a3;            /* фіолетовий фон героя */
+      --accent:#4f46e5;        /* індиго */
+      --accent-2:#22c55e;      /* зелений для прогресу */
+      --text:#0b1020;          /* основний текст */
+      --muted:#6b7280;         /* вторинний текст */
+      --card:#ffffff;          /* картки */
+      --cream:#fff7e0;         /* тло тесту */
+      --ring:rgba(79,70,229,.2);
+      --shadow:0 10px 25px rgba(2,6,23,.18), 0 2px 6px rgba(2,6,23,.12);
       --radius:18px;
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;color:var(--text);background:var(--bg)}
-    a{color:inherit;text-decoration:none}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;color:var(--text);background:#fff}
 
-    /* Top bar */
-    .topbar{position:sticky;top:0;z-index:50;background:var(--blue);color:#fff}
-    .topbar .wrap{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;gap:20px;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
-    .brand .logo{width:28px;height:28px;border-radius:8px;background:#fff;display:grid;place-items:center;color:var(--blue);font-weight:800}
-    .nav{display:flex;gap:18px;font-weight:500;opacity:.95}
-    .nav a{padding:8px 10px;border-radius:10px}
-    .nav a:hover{background:rgba(255,255,255,.14)}
-    .cta{display:flex;gap:10px}
-    .btn{border:0;border-radius:999px;padding:10px 16px;font-weight:600;cursor:pointer}
-    .btn.primary{background:#fff;color:var(--blue)}
-    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+    /* === HERO === */
+    .hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1.2fr 1fr}
+    .hero__left{background:var(--bg);color:#fff;padding:64px 56px;display:flex;align-items:center}
+    .hero__content{max-width:720px}
+    .eyebrow{font-weight:600;opacity:.9;letter-spacing:.04em}
+    h1{font-weight:800;font-size:clamp(28px,4vw,48px);line-height:1.06;margin:18px 0 12px}
+    .lead{font-size:clamp(14px,1.2vw,18px);opacity:.92}
+    .lead b{color:#fff}
+    .cta-row{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap}
+    .btn{appearance:none;border:0;padding:12px 18px;border-radius:999px;background:#fff;color:#111;font-weight:700;cursor:pointer;box-shadow:var(--shadow);transition:.18s transform,.18s box-shadow}
+    .btn:hover{transform:translateY(-1px)}
+    .btn--ghost{background:transparent;border:1.5px solid rgba(255,255,255,.6);color:#fff}
 
-    /* Hero */
-    .hero{background:linear-gradient(90deg,var(--purple) 0%, var(--purple) 55%, transparent 55%), url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 800%22><defs><linearGradient id=%22g%22 x1=%220%22 x2=%221%22 y1=%220%22 y2=%221%22><stop offset=%220%25%22 stop-color=%22%238a2be2%22/><stop offset=%22100%25%22 stop-color=%22%235c1a99%22/></linearGradient></defs><rect width=%221200%22 height=%22800%22 fill=%22url(%23g)%22/></svg>');
-      background-size:cover;background-position:center;color:#fff}
-    .hero .wrap{max-width:1180px;margin:0 auto;padding:64px 20px;display:grid;grid-template-columns:1.2fr .8fr;gap:32px}
-    .hero h1{font-size:44px;line-height:1.05;margin:0 0 16px}
-    .hero p{font-size:18px;opacity:.95;margin:0 0 22px}
-    .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero__right{position:relative;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .hero__art{max-width:min(560px,80%);aspect-ratio:1/1;display:block}
 
-    /* Features */
-    .features{max-width:1180px;margin:28px auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .feature{padding:18px}
-    .feature h3{margin:8px 0 6px;font-size:18px}
-    .feature p{margin:0;color:var(--muted);font-size:14px}
+    /* Перекриття текстового блоку на праву частину (легкий оверлап) */
+    .overlap{position:absolute;inset:auto -80px 24px auto;width:min(580px,46vw);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.18);padding:18px;border-radius:20px}
+    .overlap p{margin:0;font-size:13px;opacity:.9}
 
-    /* Sections */
-    .section{max-width:1180px;margin:28px auto;padding:0 20px}
-    .section h2{font-size:28px;margin:8px 0 14px}
+    /* === QUIZ MODAL (full-screen) === */
+    .quiz{position:fixed;inset:0;display:none;z-index:70}
+    .quiz[aria-hidden="false"]{display:block}
+    .quiz__backdrop{position:absolute;inset:0;background:rgba(17,24,39,.56);backdrop-filter:blur(4px)}
+    .quiz__panel{position:absolute;inset:20px;display:grid;grid-template-rows:auto auto 1fr auto;gap:16px;background:var(--cream);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .quiz__top{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#fff8d2;border-bottom:1px dashed rgba(2,6,23,.1)}
+    .quiz__title{font-weight:800;color:#1f2a44}
+    .quiz__progress-wrap{height:10px;background:#eef2ff;border-radius:999px;overflow:hidden;margin:0 18px}
+    .quiz__progress{height:100%;width:0;background:var(--accent-2);transition:width .25s ease}
 
-    /* Test */
-    .test{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .q{padding:18px}
-    .q h4{margin:0 0 10px}
-    .q .opt{margin:8px 0;display:block}
-    .result{padding:18px;border:1px dashed #e2e8f0}
-    .result.hidden{display:none}
+    .quiz__card{margin:12px 14px;background:var(--card);border-radius:16px;box-shadow:var(--shadow)}
+    .quiz__q{padding:18px 18px 8px;font-weight:700}
+    .quiz__answers{display:grid;gap:8px;padding:0 18px 18px}
+    .opt{display:flex;align-items:flex-start;gap:10px;padding:14px;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s;background:#fff}
+    .opt:hover{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
+    .opt input{margin-top:2px}
 
-    /* Form */
-    form{display:grid;gap:12px}
-    label{font-weight:600;font-size:14px}
-    input,select,textarea{width:100%;padding:12px 14px;border:1px solid #cbd5e1;border-radius:12px;background:#fff}
-    .consent{display:flex;gap:10px;align-items:flex-start}
+    .quiz__footer{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;background:#fff;border-top:1px dashed rgba(2,6,23,.08)}
+    .btn-sec{border:1px solid #c7ccff;background:#eef2ff;color:#27309a}
+    .btn-prim{background:var(--accent);color:#fff}
 
-    /* Tags cloud */
-    .cloud{display:flex;flex-wrap:wrap;gap:8px}
-    .tag{font-size:12px;padding:8px 12px;border-radius:999px;background:#eef2ff;color:#334155;border:1px solid #c7d2fe}
+    /* === RESULT + FORM === */
+    .result{margin:12px 14px;background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:16px;display:none}
+    .result.show{display:block}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+    .muted{color:var(--muted)}
 
-    /* Responsive */
-    @media (max-width:960px){
-      .hero .wrap{grid-template-columns:1fr}
-      .features{grid-template-columns:1fr 1fr}
-      .test{grid-template-columns:1fr}
-    }
-    @media (max-width:560px){
-      .features{grid-template-columns:1fr}
-      .hero h1{font-size:34px}
+    form{display:grid;gap:12px;margin-top:8px}
+    .fld{display:flex;flex-direction:column;gap:6px}
+    .fld label{font-size:13px;color:#334155}
+    .fld input,.fld select{padding:12px 14px;border:1.4px solid #d1d5db;border-radius:12px;font:inherit}
+    .agree{display:flex;align-items:center;gap:10px;font-size:12px;color:#475569}
+    .submit{padding:14px 18px;border-radius:12px;background:linear-gradient(90deg,#4f46e5,#7c3aed);border:0;color:#fff;font-weight:800;cursor:pointer;box-shadow:var(--shadow)}
+    .note{font-size:12px;color:#64748b}
+    .success{display:none;padding:12px 14px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;color:#065f46;font-weight:600}
+
+    /* === RESPONSIVE === */
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr;min-height:auto}
+      .hero__left{min-height:72vh}
+      .hero__right{padding:40px 0}
+      .overlap{display:none}
+      .hero__art{max-width:64%}
+      .quiz__panel{inset:10px}
     }
   </style>
 </head>
 <body>
-  <!-- TOP BAR -->
-  <header class="topbar">
-    <div class="wrap">
-      <div class="brand"><div class="logo">IS</div> Інвестиційний сервіс</div>
-      <nav class="nav">
-        <a href="#test">Тест</a>
-        <a href="#benefits">Переваги</a>
-        <a href="#kontakt">Контакт</a>
-      </nav>
-      <div class="cta">
-        <a class="btn ghost" href="#kontakt">George? – ні, Аналітик</a>
-        <a class="btn primary" href="#test">Почати тест</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <div>
+  <!-- ================= HERO ================= -->
+  <main class="hero">
+    <section class="hero__left">
+      <div class="hero__content">
+        <div class="eyebrow">Безпечні інвестиції та фінансова впевненість</div>
         <h1>Новий стиль в інвестуванні</h1>
-        <p>Інвестуйте так, як вам зручно – навіть невеликими сумами. <strong>Безпечні інвестиції</strong> та <strong>фінансова впевненість</strong> для людей 40–70 років. Отримайте <em>безкоштовну</em> рекомендацію аналітика за 2 хвилини.</p>
-        <div class="actions">
-          <a class="btn primary" href="#test">Хочу інвестувати безпечно</a>
-          <a class="btn" style="background:transparent;border:2px solid #fff;color:#fff" href="#kalk">Інвестиційний калькулятор</a>
+        <p class="lead">Інвестуйте так, як вам зручно — навіть невеликими сумами. <b>Безпечні інвестиції</b> та фінансова <b>впевненість</b> для людей 40–70 років. Отримайте <i>безкоштовну</i> рекомендацію аналітика за 2 хвилини.</p>
+        <div class="cta-row">
+          <button class="btn" onclick="openQuiz()">Хочу інвестувати безпечно</button>
+          <a class="btn btn--ghost" href="#advantages">Переваги</a>
         </div>
       </div>
-      <div class="card" style="padding:18px">
-        <h3 style="margin:6px 0 12px">Що ви отримаєте</h3>
-        <ul style="margin:0 0 8px 18px;color:#111">
-          <li><strong>Захист заощаджень від інфляції</strong></li>
-          <li><strong>Стабільний дохід</strong> – консервативна стратегія</li>
-          <li><strong>Фінансове планування</strong> для пенсії</li>
-          <li><strong>Надійний аналітик</strong> поруч з вами</li>
-        </ul>
-        <small style="color:var(--muted)">Примітка: Інвестування завжди несе ризик. Це не є інвестиційною рекомендацією згідно з законодавством ЄС.</small>
+    </section>
+    <section class="hero__right">
+      <img class="hero__art" src="https://i.ibb.co/0Xj6m3t/investing-phone-illustration.png" alt="Investing illustration" />
+      <div class="overlap"><p>Порада: спробуйте тест — він підкаже профіль та відправить рекомендацію на e‑mail. Можна закрити у будь-який момент.</p></div>
+    </section>
+  </main>
+
+  <!-- =============== QUIZ FULLSCREEN =============== -->
+  <div id="quiz" class="quiz" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="quiz__backdrop" onclick="closeQuiz()" aria-label="Закрити"></div>
+    <div class="quiz__panel">
+      <div class="quiz__top">
+        <div class="quiz__title">Швидкий тест: знайдемо для вас безпечний план</div>
+        <button class="btn btn-sec" onclick="closeQuiz()">✕ Закрити</button>
+      </div>
+      <div class="quiz__progress-wrap" aria-hidden="true"><div id="progress" class="quiz__progress"></div></div>
+
+      <!-- QUESTION CARD -->
+      <div id="card" class="quiz__card" aria-live="polite"></div>
+
+      <!-- RESULT + FORM -->
+      <div id="result" class="result" aria-live="polite"></div>
+
+      <div class="quiz__footer">
+        <button id="prevBtn" class="btn btn-sec" onclick="prevStep()" disabled>Назад</button>
+        <div style="display:flex;gap:8px">
+          <button id="nextBtn" class="btn btn-prim" onclick="nextStep()">Далі</button>
+        </div>
       </div>
     </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section id="benefits" class="features">
-    <div class="card feature">
-      <div style="color:var(--ok);font-weight:800">✓</div>
-      <h3>Консервативна стратегія</h3>
-      <p>Ми віддаємо перевагу <strong>низькому ризику</strong>, облігаціям та інвестиціям у нерухомість. Довгострокова стабільність замість швидкого прибутку.</p>
-    </div>
-    <div class="card feature">
-      <div style="color:var(--ok);font-weight:800">✓</div>
-      <h3>Захист капіталу</h3>
-      <p>Захист від втрат, диверсифікація, золото та срібло – все зрозуміло і без тиску.</p>
-    </div>
-    <div class="card feature">
-      <div style="color:var(--ok);font-weight:800">✓</div>
-      <h3>Сімейні фінанси</h3>
-      <p>Планування з урахуванням <strong>спадщини та сімейного захисту</strong> – чітко та крок за кроком.</p>
-    </div>
-    <div class="card feature">
-      <div style="color:var(--ok);font-weight:800">✓</div>
-      <h3>Надійна підтримка</h3>
-      <p>Особистий <strong>радник / аналітик</strong> – все під вашим контролем, прозорі комісії.</p>
-    </div>
-  </section>
-
-  <!-- TEST -->
-  <section id="test" class="section card">
-    <h2>Швидкий тест: знайдемо для вас безпечний план</h2>
-    <p style="color:var(--muted);margin-top:-4px">4 питання • 90 секунд • Результат + рекомендація на e‑mail</p>
-
-    <div class="test">
-      <div class="q">
-        <h4>1) Скільки вам років?</h4>
-        <label class="opt"><input type="radio" name="q1" value="20-40"> від 20 до 40</label>
-        <label class="opt"><input type="radio" name="q1" value="40-75"> від 40 до 75</label>
-        <label class="opt"><input type="radio" name="q1" value="75+"> 75+</label>
-      </div>
-      <div class="q">
-        <h4>2) Як ви вважаєте, чи можливо за допомогою додаткового доходу з інвестицій заробити на відпустку?</h4>
-        <label class="opt"><input type="radio" name="q2" value="possible"> можливо</label>
-        <label class="opt"><input type="radio" name="q2" value="dontbelieve"> не віриться</label>
-        <label class="opt"><input type="radio" name="q2" value="already"> вже заробив, хочу ще</label>
-      </div>
-      <div class="q">
-        <h4>3) Що, на вашу думку, зараз вигідно купити для заробітку?</h4>
-        <label class="opt"><input type="radio" name="q3" value="gold"> золото</label>
-        <label class="opt"><input type="radio" name="q3" value="startup"> акції молодої компанії</label>
-        <label class="opt"><input type="radio" name="q3" value="askyou"> хочу дізнатися у вас</label>
-      </div>
-      <div class="q">
-        <h4>4) Як зараз правильно обрати партнера для інвестицій, щоб не ризикувати?</h4>
-        <label class="opt"><input type="radio" name="q4" value="docs"> перевірити документи</label>
-        <label class="opt"><input type="radio" name="q4" value="small"> інвестувати маленьку суму і подивитись</label>
-        <label class="opt"><input type="radio" name="q4" value="pro"> проконсультуватися з професіоналами</label>
-        <label class="opt"><input type="radio" name="q4" value="ask"> хочу дізнатися</label>
-      </div>
-      <div class="q">
-        <button class="btn primary" id="calcBtn" type="button">Оцінити</button>
-        <div id="resultBox" class="result hidden"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT / FORM -->
-  <section id="kontakt" class="section card" style="margin-top:18px">
-    <h2>Надішлемо вам результат + план на e‑mail</h2>
-    <p style="color:var(--muted);margin-top:-4px">Заповніть контакти – з вами зв’яжеться надійний аналітик. (Повідомлення йдуть прямо на вашу e‑mail скриньку та до нас.)</p>
-
-    <!-- Замініть action на ваш Formspree/Apps Script/EmailJS endpoint -->
-    <form id="leadForm" action="REPLACE_WITH_YOUR_FORMSPREE_ACTION" method="POST">
-      <input type="hidden" name="test_result_title" id="f_result_title" />
-      <input type="hidden" name="test_result_text" id="f_result_text" />
-      <input type="hidden" name="page" value="Новий стиль в інвестуванні – лендинг" />
-
-      <div>
-        <label>Ім’я та прізвище</label>
-        <input name="name" placeholder="Напр. Іван Петренко" required />
-      </div>
-      <div>
-        <label>E‑mail</label>
-        <input type="email" name="email" placeholder="ваш@email.com" required />
-      </div>
-      <div>
-        <label>Телефон</label>
-        <input name="phone" placeholder="+420 / +380" />
-      </div>
-      <div>
-        <label>Бажаний контакт</label>
-        <select name="preferred">
-          <option>E‑mail</option>
-          <option>Телефон</option>
-          <option>WhatsApp</option>
-        </select>
-      </div>
-      <div class="consent">
-        <input type="checkbox" id="consent" required />
-        <label for="consent">Погоджуюся на обробку персональних даних з метою надсилання результату тесту та контакту з аналітиком.</label>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn primary" type="submit">Отримати рекомендацію</button>
-        <button class="btn" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="background:#e2e8f0">Вгору</button>
-      </div>
-      <small style="color:var(--muted)">Примітка: Інвестиції можуть коливатися. Це не є персоналізованою інвестиційною рекомендацією.</small>
-    </form>
-  </section>
-
-  <!-- KEYWORDS CLOUD -->
-  <section class="section card" style="margin-top:18px">
-    <h2>Що ми вирішуємо для наших клієнтів</h2>
-    <div class="cloud">
-      <span class="tag">Безпечні інвестиції</span>
-      <span class="tag">Захист заощаджень від інфляції</span>
-      <span class="tag">Інвестиції для пенсії</span>
-      <span class="tag">Стабільний дохід</span>
-      <span class="tag">Сімейні фінанси</span>
-      <span class="tag">Заощадження та інвестиції</span>
-      <span class="tag">Фінансова впевненість</span>
-      <span class="tag">Забезпечене майбутнє</span>
-      <span class="tag">Довгострокова стабільність</span>
-      <span class="tag">Захист капіталу</span>
-      <span class="tag">Золото та срібло</span>
-      <span class="tag">Консервативна стратегія</span>
-      <span class="tag">Інвестиції в нерухомість</span>
-      <span class="tag">Облігації</span>
-      <span class="tag">Низький ризик</span>
-      <span class="tag">Фінансове планування</span>
-      <span class="tag">Надійний радник</span>
-      <span class="tag">Надійний аналітик</span>
-      <span class="tag">Захист від втрат</span>
-      <span class="tag">Безпечне зростання капіталу</span>
-      <span class="tag">Спадщина та сімейний захист</span>
-    </div>
-  </section>
-
-  <footer class="section" style="text-align:center;color:var(--muted);font-size:12px">
-    © 2025 Інвестиційний сервіс. Натхненно сучасним банківським стилем. Цей сайт не є банком і не надає юридичних чи податкових консультацій.
-  </footer>
+  </div>
 
   <script>
-    const calcBtn = document.getElementById('calcBtn');
-    const resultBox = document.getElementById('resultBox');
+    /* ================= QUIZ LOGIC ================= */
+    const steps = [
+      { q: '1) Скільки вам років?', name:'age', type:'radio', options:['від 20 до 40','від 40 до 75','75+'] },
+      { q: '2) Чи можливо заробити на відпустку через інвестиції?', name:'vac', type:'radio', options:['можливо','не віриться','вже заробив, хочу ще'] },
+      { q: '3) Що зараз вигідно купити для заробітку?', name:'asset', type:'radio', options:['золото','акції молодої компанії','хочу дізнатися у вас'] },
+      { q: '4) Як правильно обрати партнера для інвестицій?', name:'partner', type:'radio', options:['перевірити документи','інвестувати маленьку суму','проконсультуватися з професіоналами','хочу дізнатися'] }
+    ];
 
-    function computeResult(){
-      const q1 = document.querySelector('input[name="q1"]:checked');
-      const q2 = document.querySelector('input[name="q2"]:checked');
-      const q3 = document.querySelector('input[name="q3"]:checked');
-      const q4 = document.querySelector('input[name="q4"]:checked');
+    let idx = 0; // поточний крок
+    const state = {}; // відповіді користувача
 
-      if(!q1 || !q2 || !q3 || !q4){
-        resultBox.classList.remove('hidden');
-        resultBox.innerHTML = '<strong>Будь ласка, заповніть усі питання.</strong>';
-        return null;
-      }
+    const els = {
+      quiz: document.getElementById('quiz'),
+      card: document.getElementById('card'),
+      result: document.getElementById('result'),
+      progress: document.getElementById('progress'),
+      prevBtn: document.getElementById('prevBtn'),
+      nextBtn: document.getElementById('nextBtn')
+    };
 
-      // Сегментація (спрощена)
-      let segment = 'Консервативний профіль';
-      let plan = 'Рекомендуємо <strong>консервативну стратегію</strong>: облігації, фонди нерухомості, золото/срібло. Мета: <em>захист заощаджень від інфляції</em> та <em>стабільний дохід</em>.';
-
-      const senior = q1.value === '75+';
-      const believes = q2.value !== 'dontbelieve';
-      const wantsAsk = q3.value === 'askyou' || q4.value === 'ask';
-      const proCheck = q4.value === 'pro' || q4.value === 'docs';
-
-      if(!senior && believes && (q3.value==='startup')){
-        segment = 'Збалансований реаліст';
-        plan = 'Врахуйте <strong>збалансований портфель</strong>: якісні облігації + дивідендні акції/фонди. Ризик контрольований, горизонт 3–10 років.';
-      }
-      if(senior || q2.value==='dontbelieve'){
-        segment = 'Обережний консерватор';
-        plan = 'Фокус на <strong>низький ризик</strong>: державні/корпоративні облігації інвесткласу, фонди нерухомості, частка золота. Мета — збереження капіталу.';
-      }
-      if(wantsAsk){
-        segment = 'Потрібна персональна консультація';
-        plan = 'Рекомендуємо коротку розмову з аналітиком (15 хв): перевірка документів, вибір надійного партнера, перша невелика інвестиція для тесту.';
-      }
-      if(proCheck && q3.value==='gold' && believes){
-        segment = 'Прагматичний захисник капіталу';
-        plan = 'Комбінація <strong>золота/срібла</strong> + <strong>облігацій</strong> для захисту від інфляції, можливе додавання дивідендних ETF.';
-      }
-
-      const text = `
-        <h4 style="margin-top:0">Результат: ${segment}</h4>
-        <p>${plan}</p>
-        <ul style="margin:0 0 8px 18px">
-          <li><strong>Фінансове планування</strong> для пенсії</li>
-          <li><strong>Захист капіталу</strong> та диверсифікація</li>
-          <li><strong>Надійний аналітик</strong> – без тиску, чітко і зрозуміло</li>
-        </ul>
-        <a class="btn primary" href="#kontakt">Хочу отримати план на e‑mail</a>
-      `;
-
-      resultBox.classList.remove('hidden');
-      resultBox.innerHTML = text;
-
-      // Передзаповнення прихованих полів для надсилання на e‑mail
-      document.getElementById('f_result_title').value = segment;
-      document.getElementById('f_result_text').value = plan.replace(/<[^>]+>/g,'');
-
-      return {segment, plan};
+    function openQuiz(){
+      els.quiz.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      idx = 0; renderStep();
+    }
+    function closeQuiz(){
+      els.quiz.setAttribute('aria-hidden','true');
+      document.body.style.overflow='auto';
     }
 
-    calcBtn.addEventListener('click', computeResult);
+    function renderStep(){
+      const step = steps[idx];
+      els.result.classList.remove('show');
 
-    // Блокування порожнього відправлення без результату
-    document.getElementById('leadForm').addEventListener('submit', (e)=>{
-      const resTitle = document.getElementById('f_result_title').value;
-      if(!resTitle){
+      // прогрес
+      const pct = Math.round((idx) / steps.length * 100);
+      els.progress.style.width = pct + '%';
+
+      // кнопки
+      els.prevBtn.disabled = idx === 0;
+      els.nextBtn.textContent = (idx === steps.length - 1) ? 'Показати результат' : 'Далі';
+
+      // рендер питання
+      const saved = state[step.name] ?? '';
+      const opts = step.options.map((t,i)=>{
+        const id = step.name + '_' + i;
+        const checked = saved === t ? 'checked' : '';
+        return `
+          <label class="opt" for="${id}">
+            <input id="${id}" type="radio" name="${step.name}" value="${t}" ${checked} />
+            <span>${t}</span>
+          </label>`
+      }).join('');
+
+      els.card.innerHTML = `
+        <div class="quiz__q">${step.q}</div>
+        <div class="quiz__answers">${opts}</div>`;
+
+      // слухач вибору
+      els.card.querySelectorAll('input[type="radio"]').forEach(inp=>{
+        inp.addEventListener('change', (e)=>{
+          state[step.name] = e.target.value;
+        })
+      });
+      // автофокус на перший інпут
+      const first = els.card.querySelector('input');
+      first && first.focus({preventScroll:true});
+    }
+
+    function nextStep(){
+      const step = steps[idx];
+      // перевірка вибору
+      if(!state[step.name]){ bump(); return; }
+      if(idx < steps.length - 1){ idx++; renderStep(); return; }
+      // показуємо результат
+      showResult();
+    }
+    function prevStep(){ idx = Math.max(0, idx - 1); renderStep(); }
+
+    // Легка анімація "підштовхування" кнопки при відсутності відповіді
+    function bump(){
+      els.nextBtn.animate([{transform:'translateY(0)'},{transform:'translateY(-2px)'},{transform:'translateY(0)'}],{duration:240});
+    }
+
+    function profileFrom(state){
+      // Дуже проста евристика під ваш MVP
+      let score = 0;
+      if(state.age === 'від 40 до 75' || state.age === '75+') score += 1;
+      if(state.asset === 'золото') score += 2;               // консервативно
+      if(state.asset === 'акції молодої компанії') score -= 1; // агресивно
+      if(state.partner === 'перевірити документи') score += 1;
+      if(state.partner === 'проконсультуватися з професіоналами') score += 1;
+
+      if(score >= 3) return {key:'conservative', title:'Консервативний профіль',
+        rec:'Рекомендуємо консервативну стратегію: облігації, фонди нерухомості, золото/срібло. Поступове збільшення частки акцій після консультації.'}
+      if(score <= 0) return {key:'aggr', title:'Помірно‑агресивний профіль',
+        rec:'Можливе поєднання індексних фондів та частки акцій зростання. Захист: 30–40% у «якорях» (золото/облігації).'}
+      return {key:'moderate', title:'Збалансований профіль',
+        rec:'Збалансований портфель: 50–60% індексні фонди/великі компанії, 20–30% облігації, 10–20% метали. Регулярний ребаланс.'}
+    }
+
+    function showResult(){
+      els.card.innerHTML = '';
+      els.nextBtn.style.display = 'none';
+      els.prevBtn.style.display = 'none';
+      els.progress.style.width = '100%';
+
+      const prof = profileFrom(state);
+      const hiddenPayload = Object.entries(state).map(([k,v])=>`<input type="hidden" name="${k}" value="${v}">`).join('') +
+                             `<input type="hidden" name="profile" value="${prof.title}">`;
+
+      els.result.innerHTML = `
+        <div class="badge">Результат: ${prof.title}</div>
+        <p class="muted" style="margin:10px 0 14px">${prof.rec}</p>
+
+        <form id="leadForm" action="https://formspree.io/f/XXXXXXXX" method="POST">
+          ${hiddenPayload}
+          <div class="fld"><label>Ім'я та прізвище</label><input required name="full_name" placeholder="Ваше ім'я"/></div>
+          <div class="fld"><label>E‑mail</label><input required type="email" name="email" placeholder="name@example.com"/></div>
+          <div class="fld"><label>Телефон</label><input name="phone" placeholder="+420..."/></div>
+          <div class="fld"><label>Бажаний контакт</label>
+            <select name="preferred_contact">
+              <option>e‑mail</option>
+              <option>телефон</option>
+              <option>WhatsApp/Viber</option>
+            </select>
+          </div>
+          <label class="agree"><input type="checkbox" required /> Згода на обробку персональних даних</label>
+          <button class="submit" type="submit">Отримати рекомендацію</button>
+          <div class="note">Натискаючи кнопку, ви надсилаєте відповіді та контакти нашому аналітику.</div>
+          <div id="ok" class="success">Дякуємо! Ми отримали ваші дані. Перевірте пошту — надішлемо рекомендацію.</div>
+        </form>
+      `;
+
+      els.result.classList.add('show');
+
+      // Formspree без перезавантаження (опційно)
+      const form = document.getElementById('leadForm');
+      form.addEventListener('submit', async (e)=>{
         e.preventDefault();
-        const r = computeResult();
-        if(r){
-          document.getElementById('kontakt').scrollIntoView({behavior:'smooth'});
-        }
-      }
-    });
+        const fd = new FormData(form);
+        try{
+          const r = await fetch(form.action, {method:'POST', body:fd, headers:{'Accept':'application/json'}});
+          if(r.ok){ form.reset(); document.getElementById('ok').style.display='block'; }
+        }catch(err){ console.error(err); }
+      });
+    }
   </script>
 </body>
 </html>
