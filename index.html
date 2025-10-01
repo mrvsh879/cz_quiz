@@ -23,23 +23,23 @@
     html,body{height:100%}
     body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;color:var(--text);background:#fff}
 
-    /* === HERO FULLSCREEN === */
-    .hero{position:relative;display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);color:#fff}
-    .hero__wrap{width:100%;padding:48px 40px;text-align:center}
-    .headline .row{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
-    .word{font-weight:900;letter-spacing:.02em;text-transform:uppercase;font-size:clamp(48px,9vw,140px);line-height:1}
-    .big{display:block;font-weight:900;text-transform:uppercase;font-size:clamp(48px,9vw,140px);line-height:1.02;margin-top:8px}
-    .pill{display:inline-block;padding:12px 18px;background:#fff;border-radius:16px;color:#3b0ea2;font-weight:800;font-size:clamp(12px,1.8vw,22px);white-space:nowrap}
+    /* === HERO FULLSCREEN WITH BG IMAGE === */
+    .hero{position:relative;display:flex;align-items:center;justify-content:center;min-height:100vh;background:url('https://pohcdn.com/sites/default/files/styles/node__blog_post__bp_banner/public/2021-09/Prague.jpeg') center/cover no-repeat}
+    .hero__overlay{background:rgba(71,18,163,0.75);border-radius:28px;padding:48px 40px;max-width:960px;width:90%;text-align:center;box-shadow:var(--shadow)}
+    .hero__overlay .word{font-weight:900;letter-spacing:.02em;text-transform:uppercase;font-size:clamp(36px,7vw,100px);line-height:1;color:#fff}
+    .hero__overlay .big{display:block;font-weight:900;text-transform:uppercase;font-size:clamp(36px,7vw,100px);line-height:1.05;margin-top:8px;color:#fff}
+    .pill{display:inline-block;padding:12px 18px;background:#fff;border-radius:16px;color:#3b0ea2;font-weight:800;font-size:clamp(12px,1.8vw,22px);white-space:nowrap;margin-left:12px}
+
     .hero__actions{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:28px;flex-wrap:wrap}
     .btn-primary{background:#fff;color:#111;font-weight:900;border-radius:16px;padding:16px 22px;cursor:pointer;border:none}
-    .btn-outline{background:transparent;border:2px solid rgba(255,255,255,.7);color:#fff;border-radius:16px;padding:14px 20px;text-decoration:none}
+    .btn-outline{background:transparent;border:2px solid rgba(255,255,255,.9);color:#fff;border-radius:16px;padding:14px 20px;text-decoration:none}
 
     @media (max-width: 900px){
-      .hero__wrap{padding:36px 18px}
-      .pill{border-radius:14px}
+      .hero__overlay{padding:28px 20px;border-radius:20px}
+      .pill{margin-left:0;margin-top:8px;display:block}
     }
 
-    /* === QUIZ MODAL (full-screen) === */
+    /* QUIZ + RESULT (оставляем без изменений) */
     .quiz{position:fixed;inset:0;display:none;z-index:70}
     .quiz[aria-hidden="false"]{display:block}
     .quiz__backdrop{position:absolute;inset:0;background:rgba(17,24,39,.56);backdrop-filter:blur(4px)}
@@ -52,9 +52,7 @@
     .quiz__card{margin:12px 14px;background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:6px 6px 18px}
     .quiz__q{padding:22px 24px;border-bottom:1px dashed #e5e7eb;font-weight:800;text-align:center;font-size:clamp(20px,2.6vw,28px);line-height:1.25}
     .quiz__answers{display:grid;gap:16px;padding:18px;grid-template-columns:1fr 1fr}
-    .opt{display:flex;align-items:center;gap:14px;min-height:84px;padding:18px 22px;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .1s;background:#fff;font-size:20px}
-    .opt.selected{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
-    .opt input{width:22px;height:22px;margin-top:2px} .opt span{flex:1}
+    .opt{display:flex;align-items:center;gap:14px;min-height:84px;padding:18px 22px;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .1s;background:#fff;font-size:20px} .opt.selected{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)} .opt input{width:22px;height:22px;margin-top:2px} .opt span{flex:1}
     .opt:hover{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
 
     .quiz__footer{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;background:#fff;border-top:1px dashed rgba(2,6,23,.08)}
@@ -64,7 +62,6 @@
     .quiz__footer .btn{min-width:160px}
     .quiz__nav .btn{min-width:140px}
 
-    /* === RESULT + FORM === */
     .result{margin:12px 14px;background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:16px;display:none}
     .result.show{display:block}
     .resultHead{padding:28px 16px 8px;text-align:center}
@@ -92,7 +89,7 @@
 <body>
   <!-- ================= HERO ================= -->
   <main class="hero">
-    <section class="hero__wrap">
+    <section class="hero__overlay">
       <div class="headline">
         <div class="row">
           <span class="word">НОВИЙ СТИЛЬ</span>
@@ -120,13 +117,8 @@
         </div>
       </div>
       <div class="quiz__progress-wrap" aria-hidden="true"><div id="progress" class="quiz__progress"></div></div>
-
-      <!-- QUESTION CARD -->
       <div id="card" class="quiz__card" aria-live="polite"></div>
-
-      <!-- RESULT + FORM -->
       <div id="result" class="result" aria-live="polite"></div>
-
       <div class="quiz__footer">
         <button id="prevBtn" class="btn btn-sec" onclick="prevStep()" disabled>Назад</button>
         <div style="display:flex;gap:8px">
@@ -286,11 +278,11 @@
           <input type="hidden" name="_template" value="table">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="fld"><label>Ім'я та прізвище</label><input required name="full_name" placeholder="Ваше ім'я"/></div>
-          <div class="fld"><label>E-mail</label><input required type="email" name="email" placeholder="name@example.com"/></div>
+          <div class="fld"><label>E‑mail</label><input required type="email" name="email" placeholder="name@example.com"/></div>
           <div class="fld"><label>Телефон</label><input name="phone" placeholder="+420..."/></div>
           <div class="fld"><label>Бажаний контакт</label>
             <select name="preferred_contact">
-              <option>e-mail</option>
+              <option>e‑mail</option>
               <option>телефон</option>
               <option>WhatsApp/Viber</option>
             </select>
@@ -324,29 +316,44 @@
       });
     }
 
-    // exports
+    // ===== Expose to global for inline handlers =====
     window.openQuiz  = openQuiz;
     window.closeQuiz = closeQuiz;
     window.nextStep  = nextStep;
     window.prevStep  = prevStep;
 
-    // ===== Optional self-tests: add ?test=1 to URL =====
+    // ===================== DEV SELF‑TESTS =====================
     function runSelfTests(){
       const tests = [];
       const assert = (name, cond)=>{ tests.push({name, pass:!!cond}); if(!cond){ console.error('[TEST FAIL]', name); } };
+
       assert('openQuiz exists', typeof window.openQuiz === 'function');
       assert('closeQuiz exists', typeof window.closeQuiz === 'function');
       assert('nextStep exists', typeof window.nextStep === 'function');
       assert('prevStep exists', typeof window.prevStep === 'function');
+
       window.openQuiz();
-      assert('Quiz visible', document.getElementById('quiz').getAttribute('aria-hidden') === 'false');
+      assert('Quiz is visible', els.quiz.getAttribute('aria-hidden') === 'false');
+      assert('Top Prev disabled on first step', document.getElementById('prevBtnTop').disabled === true);
+      assert('Bottom Prev disabled on first step', document.getElementById('prevBtn').disabled === true);
       assert('Question rendered', !!document.querySelector('.quiz__q'));
+
+      const firstRadio = document.querySelector('.quiz__answers input[type=radio]');
+      if(firstRadio){ firstRadio.click(); window.nextStep(); }
+      assert('Progress style set', /%$/.test(els.progress.style.width));
+      assert('Top/Bottom next labels match', document.getElementById('nextBtnTop').textContent === document.getElementById('nextBtn').textContent);
+
       window.closeQuiz();
+      assert('Body overflow auto on close', getComputedStyle(document.body).overflow === 'auto');
+
       const banner = document.createElement('div');
-      banner.style='position:fixed;right:10px;bottom:10px;background:#111;color:#fff;padding:8px 12px;border-radius:8px;z-index:9999;font:12px/1.2 Inter,system-ui';
-      banner.textContent = 'Self-tests done';
+      banner.id='test-banner';
+      banner.style='position:fixed;right:10px;bottom:10px;background:#111;color:#fff;padding:8px 12px;border-radius:8px;z-index:9999;opacity:.92;font:12px/1.2 Inter,system-ui';
+      const pass = tests.filter(t=>t.pass).length;
+      banner.textContent = `Self‑tests: ${pass}/${tests.length} passed`;
       document.body.appendChild(banner);
     }
+
     if(location.search.includes('test=1')){
       if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', runSelfTests); else runSelfTests();
     }
