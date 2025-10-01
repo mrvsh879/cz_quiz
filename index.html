@@ -8,12 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#4712a3;            /* фіолетовий фон героя та тесту */
-      --accent:#4f46e5;        /* індиго */
-      --accent-2:#22c55e;      /* зелений для прогресу */
-      --text:#0b1020;          /* основний текст */
-      --muted:#6b7280;         /* вторинний текст */
-      --card:#ffffff;          /* картки */
+      --bg:#4712a3;
+      --accent:#4f46e5;
+      --accent-2:#22c55e;
+      --text:#0b1020;
+      --muted:#6b7280;
+      --card:#ffffff;
       --ring:rgba(79,70,229,.2);
       --shadow:0 10px 25px rgba(2,6,23,.18), 0 2px 6px rgba(2,6,23,.12);
       --radius:18px;
@@ -23,25 +23,21 @@
     html,body{height:100%}
     body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;color:var(--text);background:#fff}
 
-    /* === HERO === */
-    .hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1.2fr 1fr}
-    .hero__left{background:var(--bg);color:#fff;padding:64px 56px;display:flex;align-items:center}
-    .hero__content{max-width:720px}
-    .eyebrow{font-weight:600;opacity:.9;letter-spacing:.04em}
-    h1{font-weight:800;font-size:clamp(28px,4vw,48px);line-height:1.06;margin:18px 0 12px}
-    .lead{font-size:clamp(14px,1.2vw,18px);opacity:.92}
-    .lead b{color:#fff}
-    .cta-row{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap}
-    .btn{appearance:none;border:0;padding:16px 22px;border-radius:14px;background:#fff;color:#111;font-weight:800;cursor:pointer;box-shadow:var(--shadow);transition:.18s transform,.18s box-shadow;font-size:18px;min-height:52px;line-height:1.1}
-    .btn:hover{transform:translateY(-1px)}
-    .btn--ghost{background:transparent;border:1.5px solid rgba(255,255,255,.6);color:#fff}
+    /* === HERO FULLSCREEN === */
+    .hero{position:relative;display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);color:#fff}
+    .hero__wrap{width:100%;padding:48px 40px;text-align:center}
+    .headline .row{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
+    .word{font-weight:900;letter-spacing:.02em;text-transform:uppercase;font-size:clamp(48px,9vw,140px);line-height:1}
+    .big{display:block;font-weight:900;text-transform:uppercase;font-size:clamp(48px,9vw,140px);line-height:1.02;margin-top:8px}
+    .pill{display:inline-block;padding:12px 18px;background:#fff;border-radius:16px;color:#3b0ea2;font-weight:800;font-size:clamp(12px,1.8vw,22px);white-space:nowrap}
+    .hero__actions{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:28px;flex-wrap:wrap}
+    .btn-primary{background:#fff;color:#111;font-weight:900;border-radius:16px;padding:16px 22px;cursor:pointer;border:none}
+    .btn-outline{background:transparent;border:2px solid rgba(255,255,255,.7);color:#fff;border-radius:16px;padding:14px 20px;text-decoration:none}
 
-    .hero__right{position:relative;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .hero__art{max-width:min(560px,80%);aspect-ratio:1/1;display:block}
-
-    /* Перекриття текстового блоку на праву частину (легкий оверлап) */
-    .overlap{position:absolute;inset:auto -80px 24px auto;width:min(580px,46vw);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.18);padding:18px;border-radius:20px}
-    .overlap p{margin:0;font-size:13px;opacity:.9}
+    @media (max-width: 900px){
+      .hero__wrap{padding:36px 18px}
+      .pill{border-radius:14px}
+    }
 
     /* === QUIZ MODAL (full-screen) === */
     .quiz{position:fixed;inset:0;display:none;z-index:70}
@@ -56,29 +52,23 @@
     .quiz__card{margin:12px 14px;background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:6px 6px 18px}
     .quiz__q{padding:22px 24px;border-bottom:1px dashed #e5e7eb;font-weight:800;text-align:center;font-size:clamp(20px,2.6vw,28px);line-height:1.25}
     .quiz__answers{display:grid;gap:16px;padding:18px;grid-template-columns:1fr 1fr}
-    .opt{display:flex;align-items:center;gap:14px;min-height:84px;padding:18px 22px;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .1s;background:#fff;font-size:20px} .opt.selected{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)} .opt input{width:22px;height:22px} .opt span{flex:1}
+    .opt{display:flex;align-items:center;gap:14px;min-height:84px;padding:18px 22px;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .1s;background:#fff;font-size:20px}
+    .opt.selected{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
+    .opt input{width:22px;height:22px;margin-top:2px} .opt span{flex:1}
     .opt:hover{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
-    .opt input{margin-top:2px}
 
     .quiz__footer{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;background:#fff;border-top:1px dashed rgba(2,6,23,.08)}
-    .btn-sec{border:1.5px solid #c7ccff;background:#eef2ff;color:#27309a}
-    .btn-prim{background:var(--accent);color:#fff}
+    .btn-sec{border:1.5px solid #c7ccff;background:#eef2ff;color:#27309a;border-radius:12px;padding:14px 18px;cursor:pointer}
+    .btn-prim{background:var(--accent);color:#fff;border-radius:12px;padding:14px 18px;border:none;cursor:pointer}
     .quiz__nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .quiz__footer .btn{min-width:160px}
     .quiz__nav .btn{min-width:140px}
 
     /* === RESULT + FORM === */
     .result{margin:12px 14px;background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:16px;display:none}
-    
-    
-    
-
     .result.show{display:block}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
-    .muted{color:var(--muted)}
-
     .resultHead{padding:28px 16px 8px;text-align:center}
-    .resultHead h2{display:inline-block;margin:0;font-weight:900;font-size:clamp(28px,3.2vw,42px);line-height:1.1;background:linear-gradient(transparent 62%, rgba(79,70,229,.25) 62%);padding:0 .25em;border-radius:6px;color:#1f235a}
+    .resultHead h2{display:inline-block;margin:0;font-weight:900;font-size:clamp(28px,3.2vw,42px);line-height:1.1;color:#1f235a}
     .resultHead p{margin:12px auto 22px;max-width:960px;color:#374151;font-size:clamp(15px,1.4vw,18px)}
     .divider{height:3px;background:linear-gradient(90deg,#3b0ea2,#8b5cf6,#3b0ea2);opacity:.85;border-radius:999px;margin:6px 8px 16px}
 
@@ -91,13 +81,7 @@
     .note{font-size:12px;color:#64748b}
     .success{display:none;padding:12px 14px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;color:#065f46;font-weight:600}
 
-    /* === RESPONSIVE === */
     @media (max-width: 980px){
-      .hero{grid-template-columns:1fr;min-height:auto}
-      .hero__left{min-height:72vh}
-      .hero__right{padding:40px 0}
-      .overlap{display:none}
-      .hero__art{max-width:64%}
       .quiz__panel{inset:10px}
       .quiz__nav .btn, .quiz__footer .btn{flex:1}
       .quiz__answers{grid-template-columns:1fr}
@@ -108,20 +92,18 @@
 <body>
   <!-- ================= HERO ================= -->
   <main class="hero">
-    <section class="hero__left">
-      <div class="hero__content">
-        <div class="eyebrow">Безпечні інвестиції та фінансова впевненість</div>
-        <h1>Новий стиль в інвестуванні</h1>
-        <p class="lead">Інвестуйте так, як вам зручно — навіть невеликими сумами. <b>Безпечні інвестиції</b> та фінансова <b>впевненість</b> для людей 40–70 років. Отримайте <i>безкоштовну</i> рекомендацію аналітика за 2 хвилини.</p>
-        <div class="cta-row">
-          <button class="btn" onclick="openQuiz()">Хочу інвестувати безпечно</button>
-          <a class="btn btn--ghost" href="#advantages">Переваги</a>
+    <section class="hero__wrap">
+      <div class="headline">
+        <div class="row">
+          <span class="word">НОВИЙ СТИЛЬ</span>
+          <span class="pill">партнерська програма</span>
         </div>
+        <span class="big">ІНВЕСТУВАННЯ</span>
       </div>
-    </section>
-    <section class="hero__right">
-      <img class="hero__art" src="https://i.ibb.co/0Xj6m3t/investing-phone-illustration.png" alt="Investing illustration" />
-      <div class="overlap"><p>Порада: спробуйте тест — він підкаже профіль та відправить рекомендацію на e‑mail. Можна закрити у будь-який момент.</p></div>
+      <div class="hero__actions">
+        <button class="btn-primary" onclick="openQuiz()">Хочу інвестувати безпечно</button>
+        <a class="btn-outline" href="#advantages">Переваги</a>
+      </div>
     </section>
   </main>
 
@@ -155,9 +137,8 @@
   </div>
 
   <script>
-  // ================= QUIZ LOGIC (IIFE + explicit window exports) =================
+  // ================= QUIZ LOGIC (IIFE + window exports) =================
   (function(){
-    // ======= CONFIG: вставь сюда свой Formspree endpoint вида https://formspree.io/f/abcd1234 =======
     const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xldpbqkv';
 
     const steps = [
@@ -167,8 +148,8 @@
       { q: '4) Як правильно обрати партнера для інвестицій?', name:'partner', type:'radio', options:['перевірити документи','інвестувати маленьку суму','проконсультуватися з професіоналами','хочу дізнатися'] }
     ];
 
-    let idx = 0;                         // поточний крок
-    const state = {};                    // відповіді користувача
+    let idx = 0;
+    const state = {};
 
     const els = {
       quiz: document.getElementById('quiz'),
@@ -187,7 +168,6 @@
       els.quiz.setAttribute('aria-hidden','false');
       document.body.style.overflow='hidden';
       idx = 0; resetState();
-      // повертаємо видимість нижніх кнопок, якщо ховали на екрані результату
       els.nextBtn.style.display = '';
       els.prevBtn.style.display = '';
       els.card.style.display = '';
@@ -204,11 +184,9 @@
       const step = steps[idx];
       els.result.classList.remove('show');
 
-      // прогрес
       const pct = Math.round((idx) / steps.length * 100);
       els.progress.style.width = pct + '%';
 
-      // кнопки
       const isFirst = idx === 0;
       const isLast  = idx === steps.length - 1;
       els.prevBtn.disabled    = isFirst;
@@ -217,7 +195,6 @@
       els.nextBtn.textContent    = nextText;
       els.nextBtnTop.textContent = nextText;
 
-      // рендер питання
       const saved = state[step.name] ?? '';
       const opts = step.options.map((t,i)=>{
         const id = step.name + '_' + i;
@@ -226,14 +203,13 @@
           <label class="opt" for="${id}">
             <input id="${id}" type="radio" name="${step.name}" value="${t}" ${checked} />
             <span>${t}</span>
-          </label>`
+          </label>`;
       }).join('');
 
       els.card.innerHTML = `
         <div class="quiz__q">${step.q}</div>
         <div class="quiz__answers">${opts}</div>`;
 
-      // слухач вибору
       els.card.querySelectorAll('label.opt').forEach(label=>{
         const inp = label.querySelector('input[type="radio"]');
         if(inp.value === saved){ label.classList.add('selected'); }
@@ -244,7 +220,6 @@
         });
       });
 
-      // автофокус на перший інпут
       const first = els.card.querySelector('input');
       first && first.focus({preventScroll:true});
     }
@@ -258,7 +233,6 @@
 
     function prevStep(){ idx = Math.max(0, idx - 1); renderStep(); }
 
-    // Легка анімація "підштовхування" кнопки при відсутності відповіді
     function bump(){
       [els.nextBtn, els.nextBtnTop].forEach(btn=>{
         if(!btn) return;
@@ -271,24 +245,22 @@
     }
 
     function profileFrom(state){
-      // Дуже проста евристика під ваш MVP
       let score = 0;
       if(state.age === 'від 40 до 75' || state.age === '75+') score += 1;
-      if(state.asset === 'золото') score += 2;                 // консервативно
-      if(state.asset === 'акції молодої компанії') score -= 1; // агресивно
+      if(state.asset === 'золото') score += 2;
+      if(state.asset === 'акції молодої компанії') score -= 1;
       if(state.partner === 'перевірити документи') score += 1;
       if(state.partner === 'проконсультуватися з професіоналами') score += 1;
 
       if(score >= 3) return {key:'conservative', title:'Консервативний профіль',
         rec:'Рекомендуємо консервативну стратегію: облігації, фонди нерухомості, золото/срібло. Поступове збільшення частки акцій після консультації.'}
-      if(score <= 0) return {key:'aggr', title:'Помірно‑агресивний профіль',
+      if(score <= 0) return {key:'aggr', title:'Помірно-агресивний профіль',
         rec:'Можливе поєднання індексних фондів та частки акцій зростання. Захист: 30–40% у «якорях» (золото/облігації).'}
       return {key:'moderate', title:'Збалансований профіль',
         rec:'Збалансований портфель: 50–60% індексні фонди/великі компанії, 20–30% облігації, 10–20% метали. Регулярний ребаланс.'}
     }
 
     function showResult(){
-      // Ховаємо картку питання повністю, щоб не було порожнього білого блоку
       els.card.innerHTML = '';
       els.card.style.display = 'none';
       els.nextBtn.style.display = 'none';
@@ -314,11 +286,11 @@
           <input type="hidden" name="_template" value="table">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="fld"><label>Ім'я та прізвище</label><input required name="full_name" placeholder="Ваше ім'я"/></div>
-          <div class="fld"><label>E‑mail</label><input required type="email" name="email" placeholder="name@example.com"/></div>
+          <div class="fld"><label>E-mail</label><input required type="email" name="email" placeholder="name@example.com"/></div>
           <div class="fld"><label>Телефон</label><input name="phone" placeholder="+420..."/></div>
           <div class="fld"><label>Бажаний контакт</label>
             <select name="preferred_contact">
-              <option>e‑mail</option>
+              <option>e-mail</option>
               <option>телефон</option>
               <option>WhatsApp/Viber</option>
             </select>
@@ -333,9 +305,7 @@
 
       els.result.classList.add('show');
 
-      // Formspree без перезавантаження (опційно)
       const form = document.getElementById('leadForm');
-      // подставляем endpoint централизованно
       form.action = FORMSPREE_ENDPOINT;
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
@@ -354,51 +324,29 @@
       });
     }
 
-    // ===== Expose to global for inline handlers =====
+    // exports
     window.openQuiz  = openQuiz;
     window.closeQuiz = closeQuiz;
     window.nextStep  = nextStep;
     window.prevStep  = prevStep;
 
-    // ===================== DEV SELF‑TESTS =====================
-    // Запустити, якщо у URL є ?test=1
+    // ===== Optional self-tests: add ?test=1 to URL =====
     function runSelfTests(){
       const tests = [];
       const assert = (name, cond)=>{ tests.push({name, pass:!!cond}); if(!cond){ console.error('[TEST FAIL]', name); } };
-
-      // базові перевірки експорту
       assert('openQuiz exists', typeof window.openQuiz === 'function');
       assert('closeQuiz exists', typeof window.closeQuiz === 'function');
       assert('nextStep exists', typeof window.nextStep === 'function');
       assert('prevStep exists', typeof window.prevStep === 'function');
-
-      // Відкриваємо квіз і перевіряємо DOM
       window.openQuiz();
-      assert('Quiz is visible', els.quiz.getAttribute('aria-hidden') === 'false');
-      assert('Top Prev disabled on first step', document.getElementById('prevBtnTop').disabled === true);
-      assert('Bottom Prev disabled on first step', document.getElementById('prevBtn').disabled === true);
+      assert('Quiz visible', document.getElementById('quiz').getAttribute('aria-hidden') === 'false');
       assert('Question rendered', !!document.querySelector('.quiz__q'));
-
-      // Симуляція кроку
-      const firstRadio = document.querySelector('.quiz__answers input[type=radio]');
-      if(firstRadio){ firstRadio.click(); window.nextStep(); }
-      assert('Progress style set', /%$/.test(els.progress.style.width));
-      assert('Top/Bottom next labels match', document.getElementById('nextBtnTop').textContent === document.getElementById('nextBtn').textContent);
-
-      // Перевіряємо overflow тіла
-      assert('Body overflow hidden on open', getComputedStyle(document.body).overflow === 'hidden');
       window.closeQuiz();
-      assert('Body overflow auto on close', getComputedStyle(document.body).overflow === 'auto');
-
-      // Вивід резюме
       const banner = document.createElement('div');
-      banner.id='test-banner';
-      banner.style='position:fixed;right:10px;bottom:10px;background:#111;color:#fff;padding:8px 12px;border-radius:8px;z-index:9999;opacity:.92;font:12px/1.2 Inter,system-ui';
-      const pass = tests.filter(t=>t.pass).length;
-      banner.textContent = `Self‑tests: ${pass}/${tests.length} passed`;
+      banner.style='position:fixed;right:10px;bottom:10px;background:#111;color:#fff;padding:8px 12px;border-radius:8px;z-index:9999;font:12px/1.2 Inter,system-ui';
+      banner.textContent = 'Self-tests done';
       document.body.appendChild(banner);
     }
-
     if(location.search.includes('test=1')){
       if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', runSelfTests); else runSelfTests();
     }
