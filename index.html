@@ -69,9 +69,18 @@
 
     /* === RESULT + FORM === */
     .result{margin:12px 14px;background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:16px;display:none}
+    
+    
+    
+
     .result.show{display:block}
     .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
     .muted{color:var(--muted)}
+
+    .resultHead{padding:28px 16px 8px;text-align:center}
+    .resultHead h2{display:inline-block;margin:0;font-weight:900;font-size:clamp(28px,3.2vw,42px);line-height:1.1;background:linear-gradient(transparent 62%, rgba(79,70,229,.25) 62%);padding:0 .25em;border-radius:6px;color:#1f235a}
+    .resultHead p{margin:12px auto 22px;max-width:960px;color:#374151;font-size:clamp(15px,1.4vw,18px)}
+    .divider{height:3px;background:linear-gradient(90deg,#3b0ea2,#8b5cf6,#3b0ea2);opacity:.85;border-radius:999px;margin:6px 8px 16px}
 
     form{display:grid;gap:12px;margin-top:8px}
     .fld{display:flex;flex-direction:column;gap:6px}
@@ -93,13 +102,6 @@
       .quiz__nav .btn, .quiz__footer .btn{flex:1}
       .quiz__answers{grid-template-columns:1fr}
       .opt{min-height:72px;font-size:18px}
-    }
-      .hero__left{min-height:72vh}
-      .hero__right{padding:40px 0}
-      .overlap{display:none}
-      .hero__art{max-width:64%}
-      .quiz__panel{inset:10px}
-      .quiz__nav .btn, .quiz__footer .btn{flex:1}
     }
   </style>
 </head>
@@ -188,6 +190,7 @@
       // повертаємо видимість нижніх кнопок, якщо ховали на екрані результату
       els.nextBtn.style.display = '';
       els.prevBtn.style.display = '';
+      els.card.style.display = '';
       els.progress.style.width = '0%';
       renderStep();
     }
@@ -285,7 +288,9 @@
     }
 
     function showResult(){
+      // Ховаємо картку питання повністю, щоб не було порожнього білого блоку
       els.card.innerHTML = '';
+      els.card.style.display = 'none';
       els.nextBtn.style.display = 'none';
       els.prevBtn.style.display = 'none';
       if(els.nextBtnTop) els.nextBtnTop.style.display = 'none';
@@ -298,9 +303,11 @@
         `<input type="hidden" name="profile" value="${prof.title}">`;
 
       els.result.innerHTML = `
-        <div class="badge">Результат: ${prof.title}</div>
-        <p class="muted" style="margin:10px 0 14px">${prof.rec}</p>
-
+        <div class="resultHead">
+          <h2>${prof.title}</h2>
+          <p>${prof.rec}</p>
+        </div>
+        <div class="divider" aria-hidden="true"></div>
         <form id="leadForm" action="#" method="POST">
           ${hiddenPayload}
           <input type="hidden" name="_subject" value="Результат квізу — ${prof.title}">
