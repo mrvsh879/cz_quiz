@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Новий стиль в інвестуванні – Безпечний тест + рекомендація</title>
+  <meta name="description" content="Короткий інвестиційний тест для людей 40–70 років. Дізнайтеся, як захистити заощадження від інфляції та отримати стабільний дохід з низьким ризиком. Безкоштовна рекомендація аналітика." />
+  <!-- META keywords (20 ключових фраз) -->
+  <meta name="keywords" content="Безпечні інвестиції,Захист заощаджень від інфляції,Інвестиції для пенсії,Стабільний дохід,Сімейні фінанси,Заощадження та інвестиції,Фінансова впевненість,Забезпечене майбутнє,Довгострокова стабільність,Захист капіталу,Золото та срібло,Консервативна стратегія,Інвестиції в нерухомість,Облігації,Низький ризик,Фінансове планування,Надійний радник,Надійний аналітик,Захист від втрат,Безпечне зростання капіталу,Спадщина та сімейний захист" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue:#2b6bf3; /* банк-подібний синій */
+      --purple:#6a1fb0; /* фіолетовий hero */
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --ok:#10b981;
+      --shadow:0 10px 30px rgba(16,24,40,.08);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+
+    /* Top bar */
+    .topbar{position:sticky;top:0;z-index:50;background:var(--blue);color:#fff}
+    .topbar .wrap{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;gap:20px;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand .logo{width:28px;height:28px;border-radius:8px;background:#fff;display:grid;place-items:center;color:var(--blue);font-weight:800}
+    .nav{display:flex;gap:18px;font-weight:500;opacity:.95}
+    .nav a{padding:8px 10px;border-radius:10px}
+    .nav a:hover{background:rgba(255,255,255,.14)}
+    .cta{display:flex;gap:10px}
+    .btn{border:0;border-radius:999px;padding:10px 16px;font-weight:600;cursor:pointer}
+    .btn.primary{background:#fff;color:var(--blue)}
+    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+
+    /* Hero */
+    .hero{background:linear-gradient(90deg,var(--purple) 0%, var(--purple) 55%, transparent 55%), url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 800%22><defs><linearGradient id=%22g%22 x1=%220%22 x2=%221%22 y1=%220%22 y2=%221%22><stop offset=%220%25%22 stop-color=%22%238a2be2%22/><stop offset=%22100%25%22 stop-color=%22%235c1a99%22/></linearGradient></defs><rect width=%221200%22 height=%22800%22 fill=%22url(%23g)%22/></svg>');
+      background-size:cover;background-position:center;color:#fff}
+    .hero .wrap{max-width:1180px;margin:0 auto;padding:64px 20px;display:grid;grid-template-columns:1.2fr .8fr;gap:32px}
+    .hero h1{font-size:44px;line-height:1.05;margin:0 0 16px}
+    .hero p{font-size:18px;opacity:.95;margin:0 0 22px}
+    .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    /* Features */
+    .features{max-width:1180px;margin:28px auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .feature{padding:18px}
+    .feature h3{margin:8px 0 6px;font-size:18px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Sections */
+    .section{max-width:1180px;margin:28px auto;padding:0 20px}
+    .section h2{font-size:28px;margin:8px 0 14px}
+
+    /* Test */
+    .test{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .q{padding:18px}
+    .q h4{margin:0 0 10px}
+    .q .opt{margin:8px 0;display:block}
+    .result{padding:18px;border:1px dashed #e2e8f0}
+    .result.hidden{display:none}
+
+    /* Form */
+    form{display:grid;gap:12px}
+    label{font-weight:600;font-size:14px}
+    input,select,textarea{width:100%;padding:12px 14px;border:1px solid #cbd5e1;border-radius:12px;background:#fff}
+    .consent{display:flex;gap:10px;align-items:flex-start}
+
+    /* Tags cloud */
+    .cloud{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{font-size:12px;padding:8px 12px;border-radius:999px;background:#eef2ff;color:#334155;border:1px solid #c7d2fe}
+
+    /* Responsive */
+    @media (max-width:960px){
+      .hero .wrap{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr 1fr}
+      .test{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      .features{grid-template-columns:1fr}
+      .hero h1{font-size:34px}
+    }
+  </style>
+</head>
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand"><div class="logo">IS</div> Інвестиційний сервіс</div>
+      <nav class="nav">
+        <a href="#test">Тест</a>
+        <a href="#benefits">Переваги</a>
+        <a href="#kontakt">Контакт</a>
+      </nav>
+      <div class="cta">
+        <a class="btn ghost" href="#kontakt">George? – ні, Аналітик</a>
+        <a class="btn primary" href="#test">Почати тест</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Новий стиль в інвестуванні</h1>
+        <p>Інвестуйте так, як вам зручно – навіть невеликими сумами. <strong>Безпечні інвестиції</strong> та <strong>фінансова впевненість</strong> для людей 40–70 років. Отримайте <em>безкоштовну</em> рекомендацію аналітика за 2 хвилини.</p>
+        <div class="actions">
+          <a class="btn primary" href="#test">Хочу інвестувати безпечно</a>
+          <a class="btn" style="background:transparent;border:2px solid #fff;color:#fff" href="#kalk">Інвестиційний калькулятор</a>
+        </div>
+      </div>
+      <div class="card" style="padding:18px">
+        <h3 style="margin:6px 0 12px">Що ви отримаєте</h3>
+        <ul style="margin:0 0 8px 18px;color:#111">
+          <li><strong>Захист заощаджень від інфляції</strong></li>
+          <li><strong>Стабільний дохід</strong> – консервативна стратегія</li>
+          <li><strong>Фінансове планування</strong> для пенсії</li>
+          <li><strong>Надійний аналітик</strong> поруч з вами</li>
+        </ul>
+        <small style="color:var(--muted)">Примітка: Інвестування завжди несе ризик. Це не є інвестиційною рекомендацією згідно з законодавством ЄС.</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="benefits" class="features">
+    <div class="card feature">
+      <div style="color:var(--ok);font-weight:800">✓</div>
+      <h3>Консервативна стратегія</h3>
+      <p>Ми віддаємо перевагу <strong>низькому ризику</strong>, облігаціям та інвестиціям у нерухомість. Довгострокова стабільність замість швидкого прибутку.</p>
+    </div>
+    <div class="card feature">
+      <div style="color:var(--ok);font-weight:800">✓</div>
+      <h3>Захист капіталу</h3>
+      <p>Захист від втрат, диверсифікація, золото та срібло – все зрозуміло і без тиску.</p>
+    </div>
+    <div class="card feature">
+      <div style="color:var(--ok);font-weight:800">✓</div>
+      <h3>Сімейні фінанси</h3>
+      <p>Планування з урахуванням <strong>спадщини та сімейного захисту</strong> – чітко та крок за кроком.</p>
+    </div>
+    <div class="card feature">
+      <div style="color:var(--ok);font-weight:800">✓</div>
+      <h3>Надійна підтримка</h3>
+      <p>Особистий <strong>радник / аналітик</strong> – все під вашим контролем, прозорі комісії.</p>
+    </div>
+  </section>
+
+  <!-- TEST -->
+  <section id="test" class="section card">
+    <h2>Швидкий тест: знайдемо для вас безпечний план</h2>
+    <p style="color:var(--muted);margin-top:-4px">4 питання • 90 секунд • Результат + рекомендація на e‑mail</p>
+
+    <div class="test">
+      <div class="q">
+        <h4>1) Скільки вам років?</h4>
+        <label class="opt"><input type="radio" name="q1" value="20-40"> від 20 до 40</label>
+        <label class="opt"><input type="radio" name="q1" value="40-75"> від 40 до 75</label>
+        <label class="opt"><input type="radio" name="q1" value="75+"> 75+</label>
+      </div>
+      <div class="q">
+        <h4>2) Як ви вважаєте, чи можливо за допомогою додаткового доходу з інвестицій заробити на відпустку?</h4>
+        <label class="opt"><input type="radio" name="q2" value="possible"> можливо</label>
+        <label class="opt"><input type="radio" name="q2" value="dontbelieve"> не віриться</label>
+        <label class="opt"><input type="radio" name="q2" value="already"> вже заробив, хочу ще</label>
+      </div>
+      <div class="q">
+        <h4>3) Що, на вашу думку, зараз вигідно купити для заробітку?</h4>
+        <label class="opt"><input type="radio" name="q3" value="gold"> золото</label>
+        <label class="opt"><input type="radio" name="q3" value="startup"> акції молодої компанії</label>
+        <label class="opt"><input type="radio" name="q3" value="askyou"> хочу дізнатися у вас</label>
+      </div>
+      <div class="q">
+        <h4>4) Як зараз правильно обрати партнера для інвестицій, щоб не ризикувати?</h4>
+        <label class="opt"><input type="radio" name="q4" value="docs"> перевірити документи</label>
+        <label class="opt"><input type="radio" name="q4" value="small"> інвестувати маленьку суму і подивитись</label>
+        <label class="opt"><input type="radio" name="q4" value="pro"> проконсультуватися з професіоналами</label>
+        <label class="opt"><input type="radio" name="q4" value="ask"> хочу дізнатися</label>
+      </div>
+      <div class="q">
+        <button class="btn primary" id="calcBtn" type="button">Оцінити</button>
+        <div id="resultBox" class="result hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FORM -->
+  <section id="kontakt" class="section card" style="margin-top:18px">
+    <h2>Надішлемо вам результат + план на e‑mail</h2>
+    <p style="color:var(--muted);margin-top:-4px">Заповніть контакти – з вами зв’яжеться надійний аналітик. (Повідомлення йдуть прямо на вашу e‑mail скриньку та до нас.)</p>
+
+    <!-- Замініть action на ваш Formspree/Apps Script/EmailJS endpoint -->
+    <form id="leadForm" action="REPLACE_WITH_YOUR_FORMSPREE_ACTION" method="POST">
+      <input type="hidden" name="test_result_title" id="f_result_title" />
+      <input type="hidden" name="test_result_text" id="f_result_text" />
+      <input type="hidden" name="page" value="Новий стиль в інвестуванні – лендинг" />
+
+      <div>
+        <label>Ім’я та прізвище</label>
+        <input name="name" placeholder="Напр. Іван Петренко" required />
+      </div>
+      <div>
+        <label>E‑mail</label>
+        <input type="email" name="email" placeholder="ваш@email.com" required />
+      </div>
+      <div>
+        <label>Телефон</label>
+        <input name="phone" placeholder="+420 / +380" />
+      </div>
+      <div>
+        <label>Бажаний контакт</label>
+        <select name="preferred">
+          <option>E‑mail</option>
+          <option>Телефон</option>
+          <option>WhatsApp</option>
+        </select>
+      </div>
+      <div class="consent">
+        <input type="checkbox" id="consent" required />
+        <label for="consent">Погоджуюся на обробку персональних даних з метою надсилання результату тесту та контакту з аналітиком.</label>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn primary" type="submit">Отримати рекомендацію</button>
+        <button class="btn" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="background:#e2e8f0">Вгору</button>
+      </div>
+      <small style="color:var(--muted)">Примітка: Інвестиції можуть коливатися. Це не є персоналізованою інвестиційною рекомендацією.</small>
+    </form>
+  </section>
+
+  <!-- KEYWORDS CLOUD -->
+  <section class="section card" style="margin-top:18px">
+    <h2>Що ми вирішуємо для наших клієнтів</h2>
+    <div class="cloud">
+      <span class="tag">Безпечні інвестиції</span>
+      <span class="tag">Захист заощаджень від інфляції</span>
+      <span class="tag">Інвестиції для пенсії</span>
+      <span class="tag">Стабільний дохід</span>
+      <span class="tag">Сімейні фінанси</span>
+      <span class="tag">Заощадження та інвестиції</span>
+      <span class="tag">Фінансова впевненість</span>
+      <span class="tag">Забезпечене майбутнє</span>
+      <span class="tag">Довгострокова стабільність</span>
+      <span class="tag">Захист капіталу</span>
+      <span class="tag">Золото та срібло</span>
+      <span class="tag">Консервативна стратегія</span>
+      <span class="tag">Інвестиції в нерухомість</span>
+      <span class="tag">Облігації</span>
+      <span class="tag">Низький ризик</span>
+      <span class="tag">Фінансове планування</span>
+      <span class="tag">Надійний радник</span>
+      <span class="tag">Надійний аналітик</span>
+      <span class="tag">Захист від втрат</span>
+      <span class="tag">Безпечне зростання капіталу</span>
+      <span class="tag">Спадщина та сімейний захист</span>
+    </div>
+  </section>
+
+  <footer class="section" style="text-align:center;color:var(--muted);font-size:12px">
+    © 2025 Інвестиційний сервіс. Натхненно сучасним банківським стилем. Цей сайт не є банком і не надає юридичних чи податкових консультацій.
+  </footer>
+
+  <script>
+    const calcBtn = document.getElementById('calcBtn');
+    const resultBox = document.getElementById('resultBox');
+
+    function computeResult(){
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const q3 = document.querySelector('input[name="q3"]:checked');
+      const q4 = document.querySelector('input[name="q4"]:checked');
+
+      if(!q1 || !q2 || !q3 || !q4){
+        resultBox.classList.remove('hidden');
+        resultBox.innerHTML = '<strong>Будь ласка, заповніть усі питання.</strong>';
+        return null;
+      }
+
+      // Сегментація (спрощена)
+      let segment = 'Консервативний профіль';
+      let plan = 'Рекомендуємо <strong>консервативну стратегію</strong>: облігації, фонди нерухомості, золото/срібло. Мета: <em>захист заощаджень від інфляції</em> та <em>стабільний дохід</em>.';
+
+      const senior = q1.value === '75+';
+      const believes = q2.value !== 'dontbelieve';
+      const wantsAsk = q3.value === 'askyou' || q4.value === 'ask';
+      const proCheck = q4.value === 'pro' || q4.value === 'docs';
+
+      if(!senior && believes && (q3.value==='startup')){
+        segment = 'Збалансований реаліст';
+        plan = 'Врахуйте <strong>збалансований портфель</strong>: якісні облігації + дивідендні акції/фонди. Ризик контрольований, горизонт 3–10 років.';
+      }
+      if(senior || q2.value==='dontbelieve'){
+        segment = 'Обережний консерватор';
+        plan = 'Фокус на <strong>низький ризик</strong>: державні/корпоративні облігації інвесткласу, фонди нерухомості, частка золота. Мета — збереження капіталу.';
+      }
+      if(wantsAsk){
+        segment = 'Потрібна персональна консультація';
+        plan = 'Рекомендуємо коротку розмову з аналітиком (15 хв): перевірка документів, вибір надійного партнера, перша невелика інвестиція для тесту.';
+      }
+      if(proCheck && q3.value==='gold' && believes){
+        segment = 'Прагматичний захисник капіталу';
+        plan = 'Комбінація <strong>золота/срібла</strong> + <strong>облігацій</strong> для захисту від інфляції, можливе додавання дивідендних ETF.';
+      }
+
+      const text = `
+        <h4 style="margin-top:0">Результат: ${segment}</h4>
+        <p>${plan}</p>
+        <ul style="margin:0 0 8px 18px">
+          <li><strong>Фінансове планування</strong> для пенсії</li>
+          <li><strong>Захист капіталу</strong> та диверсифікація</li>
+          <li><strong>Надійний аналітик</strong> – без тиску, чітко і зрозуміло</li>
+        </ul>
+        <a class="btn primary" href="#kontakt">Хочу отримати план на e‑mail</a>
+      `;
+
+      resultBox.classList.remove('hidden');
+      resultBox.innerHTML = text;
+
+      // Передзаповнення прихованих полів для надсилання на e‑mail
+      document.getElementById('f_result_title').value = segment;
+      document.getElementById('f_result_text').value = plan.replace(/<[^>]+>/g,'');
+
+      return {segment, plan};
+    }
+
+    calcBtn.addEventListener('click', computeResult);
+
+    // Блокування порожнього відправлення без результату
+    document.getElementById('leadForm').addEventListener('submit', (e)=>{
+      const resTitle = document.getElementById('f_result_title').value;
+      if(!resTitle){
+        e.preventDefault();
+        const r = computeResult();
+        if(r){
+          document.getElementById('kontakt').scrollIntoView({behavior:'smooth'});
+        }
+      }
+    });
+  </script>
+</body>
+</html>
