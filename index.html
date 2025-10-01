@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="cs">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Новий стиль в інвестуванні — MVP</title>
+  <title>Nový styl investování — MVP</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -92,27 +92,27 @@
     <section class="hero__overlay">
       <div class="headline">
         <div class="row">
-          <span class="word">НОВИЙ СТИЛЬ</span>
-          <span class="pill">партнерська програма</span>
+          <span class="word">NOVÝ STYL</span>
+          <span class="pill">partnerský program</span>
         </div>
-        <span class="big">ІНВЕСТУВАННЯ</span>
+        <span class="big">INVESTOVÁNÍ</span>
       </div>
       <div class="hero__actions">
-        <button class="btn-primary" onclick="openQuiz()">Хочу інвестувати безпечно</button>
-        <a class="btn-outline" href="#advantages">Переваги</a>
+        <button class="btn-primary" onclick="openQuiz()">Chci investovat bezpečně</button>
+        <a class="btn-outline" href="#advantages">Výhody</a>
       </div>
     </section>
   </main>
 
   <!-- =============== QUIZ FULLSCREEN =============== -->
   <div id="quiz" class="quiz" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="quiz__backdrop" onclick="closeQuiz()" aria-label="Закрити"></div>
+    <div class="quiz__backdrop" onclick="closeQuiz()" aria-label="Zavřít"></div>
     <div class="quiz__panel">
       <div class="quiz__top">
-        <div class="quiz__title">Швидкий тест: знайдемо для вас безпечний план</div>
+        <div class="quiz__title">Rychlý test: najdeme pro vás bezpečný plán</div>
         <div class="quiz__nav">
-          <button id="prevBtnTop" class="btn btn-sec" onclick="prevStep()" disabled>Назад</button>
-          <button id="nextBtnTop" class="btn btn-prim" onclick="nextStep()">Далі</button>
+          <button id="prevBtnTop" class="btn btn-sec" onclick="prevStep()" disabled>Zpět</button>
+          <button id="nextBtnTop" class="btn btn-prim" onclick="nextStep()">Dál</button>
           <button class="btn btn-sec" onclick="closeQuiz()">✕</button>
         </div>
       </div>
@@ -120,9 +120,9 @@
       <div id="card" class="quiz__card" aria-live="polite"></div>
       <div id="result" class="result" aria-live="polite"></div>
       <div class="quiz__footer">
-        <button id="prevBtn" class="btn btn-sec" onclick="prevStep()" disabled>Назад</button>
+        <button id="prevBtn" class="btn btn-sec" onclick="prevStep()" disabled>Zpět</button>
         <div style="display:flex;gap:8px">
-          <button id="nextBtn" class="btn btn-prim" onclick="nextStep()">Далі</button>
+          <button id="nextBtn" class="btn btn-prim" onclick="nextStep()">Dál</button>
         </div>
       </div>
     </div>
@@ -134,10 +134,10 @@
     const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xldpbqkv';
 
     const steps = [
-      { q: '1) Скільки вам років?', name:'age', type:'radio', options:['від 20 до 40','від 40 до 75','75+'] },
-      { q: '2) Чи можливо заробити на відпустку через інвестиції?', name:'vac', type:'radio', options:['можливо','не віриться','вже заробив, хочу ще'] },
-      { q: '3) Що зараз вигідно купити для заробітку?', name:'asset', type:'radio', options:['золото','акції молодої компанії','хочу дізнатися у вас'] },
-      { q: '4) Як правильно обрати партнера для інвестицій?', name:'partner', type:'radio', options:['перевірити документи','інвестувати маленьку суму','проконсультуватися з професіоналами','хочу дізнатися'] }
+      { q: '1) Kolik vám je let?', name:'age', type:'radio', options:['od 20 do 40','od 40 do 75','75+'] },
+      { q: '2) Je možné vydělat na dovolenou prostřednictvím investic?', name:'vac', type:'radio', options:['je to možné','nevěřím tomu','už jsem vydělal, chci víc'] },
+      { q: '3) Co je teď výhodné koupit pro zisk?', name:'asset', type:'radio', options:['zlato','akcie mladé společnosti','chci se to dozvědět od vás'] },
+      { q: '4) Jak správně vybrat partnera pro investice?', name:'partner', type:'radio', options:['ověřit dokumenty','investovat malou částku','konzultovat s profesionály','chci se to dozvědět'] }
     ];
 
     let idx = 0;
@@ -183,7 +183,7 @@
       const isLast  = idx === steps.length - 1;
       els.prevBtn.disabled    = isFirst;
       els.prevBtnTop.disabled = isFirst;
-      const nextText = isLast ? 'Показати результат' : 'Далі';
+      const nextText = isLast ? 'Zobrazit výsledek' : 'Dál';
       els.nextBtn.textContent    = nextText;
       els.nextBtnTop.textContent = nextText;
 
@@ -238,18 +238,18 @@
 
     function profileFrom(state){
       let score = 0;
-      if(state.age === 'від 40 до 75' || state.age === '75+') score += 1;
-      if(state.asset === 'золото') score += 2;
-      if(state.asset === 'акції молодої компанії') score -= 1;
-      if(state.partner === 'перевірити документи') score += 1;
-      if(state.partner === 'проконсультуватися з професіоналами') score += 1;
+      if(state.age === 'od 40 do 75' || state.age === '75+') score += 1;
+      if(state.asset === 'zlato') score += 2;
+      if(state.asset === 'akcie mladé společnosti') score -= 1;
+      if(state.partner === 'ověřit dokumenty') score += 1;
+      if(state.partner === 'konzultovat s profesionály') score += 1;
 
-      if(score >= 3) return {key:'conservative', title:'Консервативний профіль',
-        rec:'Рекомендуємо консервативну стратегію: облігації, фонди нерухомості, золото/срібло. Поступове збільшення частки акцій після консультації.'}
-      if(score <= 0) return {key:'aggr', title:'Помірно-агресивний профіль',
-        rec:'Можливе поєднання індексних фондів та частки акцій зростання. Захист: 30–40% у «якорях» (золото/облігації).'}
-      return {key:'moderate', title:'Збалансований профіль',
-        rec:'Збалансований портфель: 50–60% індексні фонди/великі компанії, 20–30% облігації, 10–20% метали. Регулярний ребаланс.'}
+      if(score >= 3) return {key:'conservative', title:'Konzervativní profil',
+        rec:'Doporučujeme konzervativní strategii: dluhopisy, fondy nemovitostí, zlato/stříbro. Postupné zvyšování podílu akcií po konzultaci.'}
+      if(score <= 0) return {key:'aggr', title:'Mírně agresivní profil',
+        rec:'Možná kombinace indexových fondů a podílu růstových akcií. Ochrana: 30–40 % v „kotvách“ (zlato/dluhopisy).'}
+      return {key:'moderate', title:'Vyvážený profil',
+        rec:'Vyvážené portfolio: 50–60 % indexové fondy/velké společnosti, 20–30 % dluhopisy, 10–20 % kovy. Pravidelná rebalancování.'}
     }
 
     function showResult(){
@@ -274,24 +274,24 @@
         <div class="divider" aria-hidden="true"></div>
         <form id="leadForm" action="#" method="POST">
           ${hiddenPayload}
-          <input type="hidden" name="_subject" value="Результат квізу — ${prof.title}">
+          <input type="hidden" name="_subject" value="Výsledek kvízu — ${prof.title}">
           <input type="hidden" name="_template" value="table">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-          <div class="fld"><label>Ім'я та прізвище</label><input required name="full_name" placeholder="Ваше ім'я"/></div>
-          <div class="fld"><label>E‑mail</label><input required type="email" name="email" placeholder="name@example.com"/></div>
-          <div class="fld"><label>Телефон</label><input name="phone" placeholder="+420..."/></div>
-          <div class="fld"><label>Бажаний контакт</label>
+          <div class="fld"><label>Jméno a příjmení</label><input required name="full_name" placeholder="Vaše jméno"/></div>
+          <div class="fld"><label>E‑mail</label><input required type="email" name="email" placeholder="jmeno@priklad.cz"/></div>
+          <div class="fld"><label>Telefon</label><input name="phone" placeholder="+420..."/></div>
+          <div class="fld"><label>Preferovaný kontakt</label>
             <select name="preferred_contact">
               <option>e‑mail</option>
-              <option>телефон</option>
+              <option>telefon</option>
               <option>WhatsApp/Viber</option>
             </select>
           </div>
-          <label class="agree"><input type="checkbox" required /> Згода на обробку персональних даних</label>
-          <button class="submit" type="submit">Отримати рекомендацію</button>
-          <div class="note">Натискаючи кнопку, ви надсилаєте відповіді та контакти нашому аналітику.</div>
-          <div id="ok" class="success">Дякуємо! Ми отримали ваші дані. Перевірте пошту — надішлемо рекомендацію.</div>
-          <div id="err" class="success" style="display:none;background:#fff1f2;border-color:#fecdd3;color:#9f1239">Сталася помилка при відправці. Спробуйте ще раз або напишіть нам листа.</div>
+          <label class="agree"><input type="checkbox" required /> Souhlas se zpracováním osobních údajů</label>
+          <button class="submit" type="submit">Získat doporučení</button>
+          <div class="note">Kliknutím na tlačítko odesíláte odpovědi a kontakty našemu analytikovi.</div>
+          <div id="ok" class="success">Děkujeme! Vaše údaje jsme obdrželi. Zkontrolujte e-mail — zašleme doporučení.</div>
+          <div id="err" class="success" style="display:none;background:#fff1f2;border-color:#fecdd3;color:#9f1239">Při odesílání došlo k chybě. Zkuste to znovu nebo nám napište e-mail.</div>
         </form>
       `;
 
@@ -305,14 +305,14 @@
         const ok  = document.getElementById('ok');
         const er  = document.getElementById('err');
         ok.style.display='none'; er.style.display='none';
-        btn.disabled = true; btn.textContent = 'Відправляємо…';
+        btn.disabled = true; btn.textContent = 'Odesíláme…';
         const fd = new FormData(form);
         try{
           const r = await fetch(form.action, {method:'POST', body:fd, headers:{'Accept':'application/json'}});
           if(r.ok){ form.reset(); ok.style.display='block'; }
           else { er.style.display='block'; }
         }catch(err){ console.error(err); er.style.display='block'; }
-        finally{ btn.disabled=false; btn.textContent='Отримати рекомендацію'; }
+        finally{ btn.disabled=false; btn.textContent='Získat doporučení'; }
       });
     }
 
