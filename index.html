@@ -53,10 +53,10 @@
     .quiz__progress-wrap{height:10px;background:#eef2ff;border-radius:999px;overflow:hidden;margin:0 18px}
     .quiz__progress{height:100%;width:0;background:var(--accent-2);transition:width .25s ease}
 
-    .quiz__card{margin:12px 14px;background:var(--card);border-radius:16px;box-shadow:var(--shadow)}
-    .quiz__q{padding:18px 18px 8px;font-weight:700}
-    .quiz__answers{display:grid;gap:8px;padding:0 18px 18px}
-    .opt{display:flex;align-items:flex-start;gap:10px;padding:16px 18px;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s;background:#fff;font-size:16px}
+    .quiz__card{margin:12px 14px;background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:6px 6px 18px}
+    .quiz__q{padding:22px 24px;border-bottom:1px dashed #e5e7eb;font-weight:800;text-align:center;font-size:clamp(20px,2.6vw,28px);line-height:1.25}
+    .quiz__answers{display:grid;gap:16px;padding:18px;grid-template-columns:1fr 1fr}
+    .opt{display:flex;align-items:center;gap:14px;min-height:84px;padding:18px 22px;border:1.5px solid #e5e7eb;border-radius:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .1s;background:#fff;font-size:20px} .opt.selected{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)} .opt input{width:22px;height:22px} .opt span{flex:1}
     .opt:hover{border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
     .opt input{margin-top:2px}
 
@@ -85,6 +85,15 @@
     /* === RESPONSIVE === */
     @media (max-width: 980px){
       .hero{grid-template-columns:1fr;min-height:auto}
+      .hero__left{min-height:72vh}
+      .hero__right{padding:40px 0}
+      .overlap{display:none}
+      .hero__art{max-width:64%}
+      .quiz__panel{inset:10px}
+      .quiz__nav .btn, .quiz__footer .btn{flex:1}
+      .quiz__answers{grid-template-columns:1fr}
+      .opt{min-height:72px;font-size:18px}
+    }
       .hero__left{min-height:72vh}
       .hero__right{padding:40px 0}
       .overlap{display:none}
@@ -222,8 +231,14 @@
         <div class="quiz__answers">${opts}</div>`;
 
       // слухач вибору
-      els.card.querySelectorAll('input[type="radio"]').forEach(inp=>{
-        inp.addEventListener('change', (e)=>{ state[step.name] = e.target.value; })
+      els.card.querySelectorAll('label.opt').forEach(label=>{
+        const inp = label.querySelector('input[type="radio"]');
+        if(inp.value === saved){ label.classList.add('selected'); }
+        inp.addEventListener('change', ()=>{
+          els.card.querySelectorAll('label.opt').forEach(l=>l.classList.remove('selected'));
+          label.classList.add('selected');
+          state[step.name] = inp.value;
+        });
       });
 
       // автофокус на перший інпут
