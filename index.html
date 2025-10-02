@@ -163,8 +163,6 @@
         options:['zlato','akcie mladé společnosti','chci se to dozvědět od vás'] },
       { q: '4) Jak správně vybrat partnera pro investice?', name:'partner', type:'radio',
         options:['ověřit dokumenty','investovat malou částku','konzultovat s profesionály','chci se to dozvědět'] },
-
-      // Nové otázky (5–7)
       { q: '5) Jaký investiční horizont je vám bližší?', name:'horizon', type:'radio',
         options:[
           'Několik měsíců, chci rychlý výsledek',
@@ -331,8 +329,6 @@
         <div class="resultHead">
           <h2>${prof.title}</h2>
           <p>${prof.rec}</p>
-          <!-- Okamžitá možnost stáhnout PDF se strategií -->
-          <a class="download" href="${STRATEGY_LINK}" target="_blank" rel="noopener">Stáhnout obchodní strategii (PDF)</a>
         </div>
 
         <div class="divider" aria-hidden="true"></div>
@@ -377,10 +373,28 @@
         const fd = new FormData(form);
         try{
           const r = await fetch(form.action, {method:'POST', body:fd, headers:{'Accept':'application/json'}});
-          if(r.ok){ form.reset(); ok.style.display='block'; }
-          else { er.style.display='block'; }
-        }catch(err){ console.error(err); er.style.display='block'; }
-        finally{ btn.disabled=false; btn.textContent='Získat doporučení'; }
+          if(r.ok){
+            form.reset();
+            ok.style.display='block';
+
+            // ➜ Přidáme tlačítko stahování PDF TEPRVE po úspěšném odeslání
+            const dl = document.createElement('a');
+            dl.href = STRATEGY_LINK;
+            dl.target = '_blank';
+            dl.rel = 'noopener';
+            dl.className = 'download';
+            dl.textContent = 'Stáhnout obchodní strategii (PDF)';
+            ok.appendChild(dl);
+
+          } else {
+            er.style.display='block';
+          }
+        }catch(err){
+          console.error(err);
+          er.style.display='block';
+        }finally{
+          btn.disabled=false; btn.textContent='Získat doporučení';
+        }
       });
     }
 
